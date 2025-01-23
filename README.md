@@ -12,7 +12,7 @@ Welcome to **Supra Spike**, the pioneering platform for meme creation and fair t
 2. Provide a space for creating memes and fostering community-driven innovation.
 3. Highlight the potential of **Move** contracts by showcasing efficient and secure applications on Supra Oracles.
 
-We believe Supra is the best ecosystem for building decentralized applications thanks to its cutting-edge performance and its focus on efficiency and scalability. 
+We believe Supra is the best ecosystem for building decentralized applications thanks to its cutting-edge performance and its focus on efficiency and scalability.
 
 ---
 
@@ -33,9 +33,36 @@ We believe Supra is the best ecosystem for building decentralized applications t
 
 ---
 
+## Smart Contracts
+
+Supra Spike leverages Move contracts to provide seamless functionality for token launches, NFTs, and IDOs. Below are the key contracts:
+
+### Pump FA Contract
+
+- **Address**: `0x6e3e09ab7fd0145d7befc0c68d6944ddc1a90fd45b8a6d28c76d8c48bed676b0::pump_fa`
+- **Functions**:
+  - `deploy`: Used for creating tokens.
+  - `buy` and `sell`: Enable users to buy and sell tokens.
+- **Features**: Implements **virtual pools** similar to Pump.fun for efficient token management.
+- **Status**: Currently in **testnet**, with ongoing improvements.
+
+### NFT Contract
+
+- **Address**: `0x6e3e09ab7fd0145d7befc0c68d6944ddc1a90fd45b8a6d28c76d8c48bed676b0::nft`
+- **Description**: Powers the first-ever NFT collection on Supra, showcasing the creative potential of the ecosystem.
+
+### IDO Contract
+
+- **Address**: `0x6e3e09ab7fd0145d7befc0c68d6944ddc1a90fd45b8a6d28c76d8c48bed676b0::ido`
+- **Description**: Manages token distribution during the IDO phase to ensure fair and transparent launches.
+
+For more details about the tokenomics and contract functionality, visit our **[Medium page](https://medium.com/@supraspike.fun/spike-tokenomics-and-contracts-bb7b8f15527e)**.
+
+---
+
 ## Token Distribution
 
-Our tokenomics and distribution plan can be found in detail on our **[Medium page](https://medium.com)**. Transparency and fairness are at the core of our mission.
+Our tokenomics and distribution plan can be found in detail on our **[Medium page](https://medium.com/@supraspike.fun/spike-tokenomics-and-contracts-bb7b8f15527e)**. Transparency and fairness are at the core of our mission.
 
 ---
 
@@ -64,14 +91,13 @@ We aim to become a cornerstone of the Supra ecosystem by:
 
 We invite everyone to be part of our journey as we shape the future of memes and token launches on Supra Oracles. Connect with us and join the conversation:
 
-- **Telegram**: [Join our community](https://t.me/supra_spike)
-- **Twitter**: [Follow us](https://twitter.com/supra_spike)
-- **Medium**: [Learn more](https://medium.com)
+- **Website**: [supraspike.fun](https://supraspike.fun)
+- **Telegram**: [Join our community](https://t.me/supraspike)
+- **Twitter**: [Follow us](https://x.com/supra_spikes)
+- **Medium**: [Learn more](https://medium.com/@supraspike.fun/spike-tokenomics-and-contracts-bb7b8f15527e)
 
 Together, we can unlock the full potential of Supra Oracles and Move contracts.
 
 ---
 
 Thank you for your support as we continue to innovate and lead in this exciting ecosystem!
-
----
