@@ -1,4 +1,4 @@
-# Supra Spike: Thetoken Launcher on Supra Oracles
+# Supra Spike: A meme/token launcher on Supra Oracles
 
 Welcome to **Supra Spike**, the pioneering platform for meme creation and fair token launches on the **Supra Oracles** blockchain. As the first memecoin and NFT collection on Supra, we are building tools that empower creators and developers to harness the efficiency and power of **Move** contracts within the Supra ecosystem.
 
