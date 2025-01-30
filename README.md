@@ -150,29 +150,48 @@ Currently, our platform is in testnet. The flow diagram below explains the curre
 
 ```mermaid
 graph TD;
+    
     subgraph User Interface
-        A[Frontend] 
+        A[🌍 Frontend] 
     end
+
     subgraph Database & AI
-        B[Supabase - Database] 
-        B1[AI Supervision - Filters Projects]
+        B[📦 Supabase - Database] 
+        B1[🤖 AI Supervision - Filters Projects]
     end
+
     subgraph Backend
-        C[Railway Listeners]
+        C[🎧 Railway Listeners]
     end
+
     subgraph Blockchain
-        D[SUPRA Blockchain]
-        D1[pump_fa Contract]
-        D2[AMM Liquidity Pool]
+        D[🔗 SUPRA Blockchain]
+        D1[⚡ pump_fa Contract]
+        D2[💧 AMM Liquidity Pool]
     end
-    A -->|Fetch Pools & Projects| B
-    A -->|User Selects Launch Type| D1
-    B -->|AI Extracts Best Projects| B1
-    C -->|Listen to Events| D
-    D -->|Smart Contracts| D1
-    D1 -->|Bonding Curve| D2
-    D1 -->|Meme Launch| E1
-    D1 -->|DAO Launch| E2
+
+    subgraph Token Launches
+        E1[🎭 Meme Launch - 5K Virtual Liquidity] 
+        E2[🏛 DAO Launch - 500K Liquidity]
+    end
+
+    subgraph Governance
+        F[🗳 SPIKE Holders Voting] 
+        F1[🔒 Stake SPIKE for Voting Power]
+    end
+
+    A -->|🔄 Fetch Pools & Projects| B
+    A -->|🚀 User Selects Launch Type| D1
+    A -->|🗳 Users Vote on Projects| F
+    B -->|📊 AI Extracts Best Projects| B1
+    B1 -->|📝 Creates a Public List| A
+    C -->|🎯 Listen to Events| D
+    D -->|💰 Bonding Curve Reaches Target| D1
+    D1 -->|🔄 Auto-Create Pool| D2
+    D1 -->|🏁 If Meme Launch| E1
+    D1 -->|🏁 If DAO Launch| E2
+    F -->|🔒 Locked SPIKE = Voting Power| F1
+
 ```
 
 ```mermaid
