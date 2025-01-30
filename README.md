@@ -173,7 +173,7 @@ graph TD;
     D1 -->|Bonding Curve| D2
     D1 -->|Meme Launch| E1
     D1 -->|DAO Launch| E2
-
+```
 
 graph TD;
     subgraph User Interface
@@ -185,4 +185,5 @@ graph TD;
     end
     A -->|Users Vote on Projects| F
     F -->|Stake SPIKE| F1
+
 
