@@ -114,6 +114,8 @@ Be part of **Supra Spike** and help shape the **future of token launches**!
 
 ---
 
+### Diagrama 1: Platform Architecture
+
 ```mermaid
 graph TD;
     
@@ -138,4 +140,55 @@ graph TD;
     D -->|💰 Bonding Curve Reaches Target| D1
     D1 -->|🔄 Auto-Create Pool| D2
     C -->|📊 Update Data| B
+ ```
+
+## 🚀 SupraSpike Platform Flow Diagram
+
+Currently, our platform is in testnet. The flow diagram below explains the current functionality of SupraSpike, where we launch token pools and track events. Our final vision is to incorporate meme launches with virtual liquidity of 5K and DAO launches with 500K liquidity to reduce speculation. Additionally, AI will supervise the data and identify the best projects to present them to the community for voting.
+
+### Diagrama 2: Platform Architecture in future
+
+graph TD;
+    
+    subgraph User Interface
+        A[🌍 Frontend] 
+    end
+
+    subgraph Database & AI
+        B[📦 Supabase - Database] 
+        B1[🤖 AI Supervision - Filters Projects]
+    end
+
+    subgraph Backend
+        C[🎧 Railway Listeners]
+    end
+
+    subgraph Blockchain
+        D[🔗 SUPRA Blockchain]
+        D1[⚡ pump_fa Contract]
+        D2[💧 AMM Liquidity Pool]
+    end
+
+    subgraph Token Launches
+        E1[🎭 Meme Launch - 5K Virtual Liquidity] 
+        E2[🏛 DAO Launch - 500K Liquidity]
+    end
+
+    subgraph Governance
+        F[🗳 SPIKE Holders Voting] 
+        F1[🔒 Stake SPIKE for Voting Power]
+    end
+
+    A -->|🔄 Fetch Pools & Projects| B
+    A -->|🚀 User Selects Launch Type| D1
+    A -->|🗳 Users Vote on Projects| F
+    B -->|📊 AI Extracts Best Projects| B1
+    B1 -->|📝 Creates a Public List| A
+    C -->|🎯 Listen to Events| D
+    D -->|💰 Bonding Curve Reaches Target| D1
+    D1 -->|🔄 Auto-Create Pool| D2
+    D1 -->|🏁 If Meme Launch| E1
+    D1 -->|🏁 If DAO Launch| E2
+    F -->|🔒 Locked SPIKE = Voting Power| F1
+
 
