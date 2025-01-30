@@ -144,7 +144,7 @@ graph TD;
 
 ## 🚀 SupraSpike Platform Flow Diagram
 
-Currently, our platform is in testnet. The flow diagram below explains the current functionality of SupraSpike, where we launch token pools and track events. Our final vision is to incorporate meme launches with virtual liquidity of 5K and DAO launches with 500K liquidity to reduce speculation. Additionally, AI will supervise the data and identify the best projects to present them to the community for voting.
+Currently, our platform is in testnet. The flow diagram below explains the future functionality of SupraSpike, where we launch token pools and track events. Our final vision is to incorporate meme launches with virtual liquidity of 5K and DAO launches with 500K liquidity to reduce speculation. Additionally, AI will supervise the data and identify the best projects to present them to the community for voting.
 
 ### Diagrama 2: Platform Architecture in future
 
