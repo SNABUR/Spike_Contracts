@@ -118,25 +118,24 @@ Be part of **Supra Spike** and help shape the **future of token launches**!
 graph TD;
     
     subgraph User Interface
-        A[Frontend] 
+        A[🌍 Frontend] 
     end
 
     subgraph Backend
-        B[Supabase - Database] 
-        C[Railway Listener]
+        B[📦 Supabase - Database] 
+        C[🎧 Railway Listeners]
     end
 
     subgraph Blockchain
-        D[SUPRA Blockchain]
-        D1[pump_fa Contract]
-        D2[airdroper Contract]
+        D[🔗 SUPRA Blockchain]
+        D1[⚡ pump_fa Contract]
+        D2[💧 AMM Liquidity Pool]
     end
 
-    A -->|Fetch Data| B
-    A -->|Trigger Events| C
-    C -->|Listen to Events| D
-    D -->|Smart Contracts| D1
-    D -->|Smart Contracts| D2
-    C -->|Process & Store Data| B
-
+    A -->|🔄 Fetch Pools| B
+    A -->|🚀 User Interactions| C
+    C -->|🎯 Listen to Events| D
+    D -->|💰 Bonding Curve Reaches Target| D1
+    D1 -->|🔄 Auto-Create Pool| D2
+    C -->|📊 Update Data| B
 
