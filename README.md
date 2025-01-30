@@ -100,6 +100,18 @@ We want **Supra Oracles** to be more than just a blockchain—it should be a **l
 
 We are committed to making Supra **the go-to blockchain for token launches**—not just for speculation but for **real value creation**.  
 
+## Join the Movement  
+
+Be part of **Supra Spike** and help shape the **future of token launches**!  
+
+🌐 **Website**: [supraspike.fun](https://supraspike.fun)  
+💬 **Telegram**: [Join our community](https://t.me/supraspike)  
+🐦 **Twitter**: [Follow us](https://x.com/supra_spikes)  
+📝 **Medium**: [Read our insights](https://medium.com/@supraspike.fun/spike-tokenomics-and-contracts-bb7b8f15527e)  
+
+---
+
+
 ---
 
 ```mermaid
@@ -128,13 +140,3 @@ graph TD;
     C -->|Process & Store Data| B
 
 
-## Join the Movement  
-
-Be part of **Supra Spike** and help shape the **future of token launches**!  
-
-🌐 **Website**: [supraspike.fun](https://supraspike.fun)  
-💬 **Telegram**: [Join our community](https://t.me/supraspike)  
-🐦 **Twitter**: [Follow us](https://x.com/supra_spikes)  
-📝 **Medium**: [Read our insights](https://medium.com/@supraspike.fun/spike-tokenomics-and-contracts-bb7b8f15527e)  
-
----
