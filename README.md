@@ -8,8 +8,6 @@ Welcome to **Supra Spike**, the ultimate **meme and project launcher** built on 
 
 Supra Spike is a **token and project launchpad** that empowers creators to bring their ideas to life using **Move smart contracts**. Our goal is to **grow the Supra ecosystem**, not just as a place for speculation but as a **hub for real innovation**.  
 
-We are building a **leaderboard**, powered by **AI**, to analyze and highlight the best projects launched through our platform. By leveraging AI-driven insights, we can **filter out the noise** and showcase truly valuable initiatives.  
-
 With **Supra Spike**, we aim to:  
 ✅ **Launch tokens easily** – Whether it's a meme or a serious utility token, our platform simplifies the process.  
 ✅ **Support real innovation** – We provide tools to **crowdfund ideas**, making it easier for projects with real potential to get funded.  
