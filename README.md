@@ -77,7 +77,7 @@ The **Supra Spike** team is composed of **experienced crypto builders and commun
 👨‍💻 **Development & Strategy** – Led by a dedicated builder focused on **smart contracts and platform UIX**.  
 📢 **Community & Engagement** – Managed by a passionate team ensuring **strong community support on Telegram and Twitter**.  
 
-Our team includes well-known figures in the **DeFi and crypto ecosystem**:  
+Our team: **DeFi and crypto ecosystem**:  
 
 - 🛠 **Daniela DeFi** – [@chicablockchain](https://x.com/chicablockchain)  
 - 🎭 **Snabur** – [@ZAMBURXD](https://x.com/ZAMBURXD)  
