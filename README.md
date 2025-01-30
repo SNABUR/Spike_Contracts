@@ -1,103 +1,107 @@
-# Supra Spike: A meme/token launcher on Supra Oracles
+# 🚀 Supra Spike: The Next-Gen Token & Project Launcher on Supra Oracles  
 
-Welcome to **Supra Spike**, the pioneering platform for meme creation and fair token launches on the **Supra Oracles** blockchain. As the first memecoin and NFT collection on Supra, we are building tools that empower creators and developers to harness the efficiency and power of **Move** contracts within the Supra ecosystem.
-
----
-
-## About Supra Spike
-
-**Supra Spike** is a platform designed to:
-
-1. Enable **fair token launches** with user-friendly tools.
-2. Provide a space for creating memes and fostering community-driven innovation.
-3. Highlight the potential of **Move** contracts by showcasing efficient and secure applications on Supra Oracles.
-
-We believe Supra is the best ecosystem for building decentralized applications thanks to its cutting-edge performance and its focus on efficiency and scalability.
+Welcome to **Supra Spike**, the ultimate **meme and project launcher** built on the **Supra Oracles** blockchain. While we started as a **meme-focused platform**, we aim to **expand beyond memes**, creating a space where both fun and **serious, utility-driven projects** can thrive.  
 
 ---
 
-## Key Features
+## 🔥 What is Supra Spike?  
 
-- **Token Factory**: Easily create tokens on the Supra blockchain using standardized Move contracts.
-- **Fair Launches**: Ensuring fairness in token distributions, similar to platforms like **Pump.fun**, but tailored for Supra’s innovative framework.
-- **NFT Collection**: Supra Spike hosts the **first-ever NFT collection on Supra**, blending creativity with blockchain technology.
-- **Community-Driven**: We’re building a vibrant community that celebrates memes, creativity, and decentralized innovation.
+Supra Spike is a **token and project launchpad** that empowers creators to bring their ideas to life using **Move smart contracts**. Our goal is to **grow the Supra ecosystem**, not just as a place for speculation but as a **hub for real innovation**.  
 
----
+We are building a **leaderboard**, powered by **AI**, to analyze and highlight the best projects launched through our platform. By leveraging AI-driven insights, we can **filter out the noise** and showcase truly valuable initiatives.  
 
-## Development Status
-
-- **Token Launcher**: Currently in **testnet**, our Token Factory allows users to create and deploy tokens seamlessly. We aim to fully deploy it on **mainnet** once Automated Market Makers (AMMs) are live.
-- **IDO Plans**: The IDO (Initial DEX Offering) for Supra Spike will align with the launch of AMMs on mainnet, ensuring liquidity and accessibility.
-- **Hackathon Participation**: Our platform was built as part of a Supra hackathon to demonstrate the capabilities of Move contracts and contribute to the Supra ecosystem.
+With **Supra Spike**, we aim to:  
+✅ **Launch tokens easily** – Whether it's a meme or a serious utility token, our platform simplifies the process.  
+✅ **Support real innovation** – We provide tools to **crowdfund ideas**, making it easier for projects with real potential to get funded.  
+✅ **Grow the ecosystem** – By enabling both fun and meaningful projects, we help expand Supra beyond just speculation.  
 
 ---
 
-## Smart Contracts
+## 🌟 Key Features  
 
-Supra Spike leverages Move contracts to provide seamless functionality for token launches, NFTs, and IDOs. Below are the key contracts:
-
-### Pump FA Contract
-
-- **Address**: `0x6e3e09ab7fd0145d7befc0c68d6944ddc1a90fd45b8a6d28c76d8c48bed676b0::pump_fa`
-- **Functions**:
-  - `deploy`: Used for creating tokens.
-  - `buy` and `sell`: Enable users to buy and sell tokens.
-- **Features**: Implements **virtual pools** similar to Pump.fun for efficient token management.
-- **Status**: Currently in **testnet**, with ongoing improvements.
-
-### NFT Contract
-
-- **Address**: `0x6e3e09ab7fd0145d7befc0c68d6944ddc1a90fd45b8a6d28c76d8c48bed676b0::nft`
-- **Description**: Powers the first-ever NFT collection on Supra, showcasing the creative potential of the ecosystem.
-
-### IDO Contract
-
-- **Address**: `0x6e3e09ab7fd0145d7befc0c68d6944ddc1a90fd45b8a6d28c76d8c48bed676b0::ido`
-- **Description**: Manages token distribution during the IDO phase to ensure fair and transparent launches.
-
-For more details about the tokenomics and contract functionality, visit our **[Medium page](https://medium.com/@supraspike.fun/spike-tokenomics-and-contracts-bb7b8f15527e)**.
+- **🛠 Token Factory** – Launch tokens seamlessly with Move-based smart contracts.  
+- **🎭 Meme & Utility Project Launches** – A diverse space for both memes and serious blockchain projects.  
+- **📊 AI-Powered Leaderboard** – Highlighting the best ideas based on quality and innovation.  
+- **💰 Crowdfunding & Fair Launches** – Helping developers and communities raise funds transparently.  
+- **🎨 First-Ever Supra NFT Collection** – Combining creativity with blockchain utility.  
 
 ---
 
-## Token Distribution
+## 📌 Development Status  
 
-Our tokenomics and distribution plan can be found in detail on our **[Medium page](https://medium.com/@supraspike.fun/spike-tokenomics-and-contracts-bb7b8f15527e)**. Transparency and fairness are at the core of our mission.
-
----
-
-## Team
-
-The Supra Spike team is composed of four dedicated members:
-
-- **1 Developer**: Focused on building and maintaining the platform.
-- **3 Moderators**: Managing community engagement on **Telegram** and **Twitter**.
-
-We’ve been actively working on this project since the launch of the Supra mainnet, establishing ourselves as early adopters and contributors to the ecosystem.
+🔹 **Token Launcher**: Currently in **testnet**, allowing users to create and deploy tokens easily. We plan to launch on **mainnet** once Automated Market Makers (AMMs) are live.  
+🔹 **IDO Plans**: The **Initial DEX Offering (IDO)** for Supra Spike will be synchronized with AMM deployments to ensure liquidity and accessibility.  
+🔹 **Hackathon Participation**: Supra Spike was developed as part of a Supra hackathon, demonstrating the potential of Move contracts and contributing to the Supra ecosystem.  
 
 ---
 
-## Vision
+## 🛠 Smart Contracts  
 
-We aim to become a cornerstone of the Supra ecosystem by:
+Supra Spike leverages **Move contracts** to provide seamless functionality for **token launches, NFTs, and IDOs**. Below are the key contracts:  
 
-- Expanding the use of Move contracts for token launches and NFT creation.
-- Building partnerships with key AMMs on Supra to strengthen our ecosystem integration.
-- Growing a thriving community that supports memes and decentralized innovation.
+### 🔹 Pump FA Contract  
+
+- **Address**: `0x6e3e09ab7fd0145d7befc0c68d6944ddc1a90fd45b8a6d28c76d8c48bed676b0::pump_fa`  
+- **Functions**:  
+  - `deploy` – Used for creating tokens.  
+  - `buy` & `sell` – Enables users to trade tokens.  
+- **Features**: Implements **virtual pools** similar to **Pump.fun** for efficient token distribution.  
+- **Status**: Currently in **testnet**, with ongoing improvements.  
+
+### 🔹 NFT Contract  
+
+- **Address**: `0x6e3e09ab7fd0145d7befc0c68d6944ddc1a90fd45b8a6d28c76d8c48bed676b0::nft`  
+- **Description**: Manages the **first-ever NFT collection** on Supra, showcasing creative potential.  
+
+### 🔹 IDO Contract  
+
+- **Address**: `0x6e3e09ab7fd0145d7befc0c68d6944ddc1a90fd45b8a6d28c76d8c48bed676b0::ido`  
+- **Description**: Handles **token distributions** during the IDO phase to ensure **fair and transparent launches**.  
+
+For more details about **tokenomics and contract functionality**, check out our **[Medium page](https://medium.com/@supraspike.fun/spike-tokenomics-and-contracts-bb7b8f15527e)**.  
 
 ---
 
-## Join Us
+## 🔹 Tokenomics & Distribution  
 
-We invite everyone to be part of our journey as we shape the future of memes and token launches on Supra Oracles. Connect with us and join the conversation:
-
-- **Website**: [supraspike.fun](https://supraspike.fun)
-- **Telegram**: [Join our community](https://t.me/supraspike)
-- **Twitter**: [Follow us](https://x.com/supra_spikes)
-- **Medium**: [Learn more](https://medium.com/@supraspike.fun/spike-tokenomics-and-contracts-bb7b8f15527e)
-
-Together, we can unlock the full potential of Supra Oracles and Move contracts.
+Our **tokenomics and distribution plan** can be found in detail on our **[Medium page](https://medium.com/@supraspike.fun/spike-tokenomics-and-contracts-bb7b8f15527e)**.  
+We are committed to **transparency and fairness** in all our launches.  
 
 ---
 
-Thank you for your support as we continue to innovate and lead in this exciting ecosystem!
+## 👥 The Team  
+
+The **Supra Spike** team consists of **dedicated builders and community leaders**:  
+
+👨‍💻 **1 Developer** – Focused on **building and maintaining the platform**.  
+📢 **3 Moderators** – Managing **community engagement** on **Telegram and Twitter**.  
+
+We have been actively working on this project **since the launch of the Supra mainnet**, positioning ourselves as **early adopters and key contributors** to the ecosystem.  
+
+---
+
+## 🎯 Our Vision  
+
+We want **Supra Oracles** to be more than just a blockchain—it should be a **launchpad for groundbreaking ideas**. With Supra Spike, we’re building:  
+
+💡 **A trusted platform** for launching high-quality projects.  
+📈 **An ecosystem that grows organically**, fueled by real innovation and community-driven initiatives.  
+🤖 **AI-driven project evaluation**, ensuring that **serious projects get the attention they deserve**.  
+🌎 **A fair and open crowdfunding space**, making it easier for innovative ideas to become reality.  
+
+We are committed to making Supra **the go-to blockchain for token launches**—not just for speculation but for **real value creation**.  
+
+---
+
+## 📢 Join the Movement  
+
+Be part of **Supra Spike** and help shape the **future of token launches**!  
+
+🌐 **Website**: [supraspike.fun](https://supraspike.fun)  
+💬 **Telegram**: [Join our community](https://t.me/supraspike)  
+🐦 **Twitter**: [Follow us](https://x.com/supra_spikes)  
+📝 **Medium**: [Read our insights](https://medium.com/@supraspike.fun/spike-tokenomics-and-contracts-bb7b8f15527e)  
+
+---
+
+Let’s **build, launch, and innovate**—together. 🚀🔥  
