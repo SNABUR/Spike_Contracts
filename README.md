@@ -194,17 +194,3 @@ graph TD;
 
 ```
 
-```mermaid
-
-graph TD;
-    subgraph User Interface
-        A[Frontend] 
-    end
-    subgraph Governance
-        F[SPIKE Holders Voting]
-        F1[Stake SPIKE for Voting Power]
-    end
-    A -->|Users Vote on Projects| F
-    F -->|Stake SPIKE| F1
-
-
