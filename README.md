@@ -175,6 +175,8 @@ graph TD;
     D1 -->|DAO Launch| E2
 ```
 
+```mermaid
+
 graph TD;
     subgraph User Interface
         A[Frontend] 
