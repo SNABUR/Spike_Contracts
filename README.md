@@ -20,18 +20,20 @@ With **Supra Spike**, we aim to:
 - **🛠 Token Factory** – Launch tokens seamlessly with Move-based smart contracts.  
 - **🎭 Meme & Utility Project Launches** – A diverse space for both memes and serious blockchain projects.  
 - **📊 AI-Powered Leaderboard** – Highlighting the best ideas based on quality and innovation.  
-- **💰 Crowdfunding & Fair Launches** – Helping developers and communities raise funds transparently.  
 - **🎨 First-Ever Supra NFT Collection** – Combining creativity with blockchain utility.  
 
 ---
 
 ## 📌 Development Status  
 
-🔹 **Token Launcher**: Currently in **testnet**, allowing users to create and deploy tokens easily. We plan to launch on **mainnet** once Automated Market Makers (AMMs) are live.  
-🔹 **IDO Plans**: The **Initial DEX Offering (IDO)** for Supra Spike will be synchronized with AMM deployments to ensure liquidity and accessibility.  
-🔹 **Hackathon Participation**: Supra Spike was developed as part of a Supra hackathon, demonstrating the potential of Move contracts and contributing to the Supra ecosystem.  
+🔹 **Token Launcher**: Currently in **testnet**, allowing users to create, deploy, and trade tokens easily. We plan to launch on **mainnet** once Automated Market Makers (AMMs) are live.  
 
----
+🔹 **AI-Powered Project Filtering & Governance**: We are developing an **AI-driven filtering system** that will analyze project proposals and highlight **truly innovative ideas**. This AI will act as a **first filter**, identifying promising projects while reducing the chances of scams or low-quality initiatives.  
+
+🔹 **Community Governance Voting**: After passing the **AI filter**, projects will go through a **community voting process** via **Spike governance mechanisms**. This ensures a **double-layered filtering system** where only the most **valuable and high-potential** projects get community support and visibility.  
+
+This **dual validation system (AI + Governance)** will help maintain a **high standard for projects launched on Supra**, ensuring real innovation while **empowering the Spike community** to shape the ecosystem.  
+
 
 ## 🛠 Smart Contracts  
 
@@ -56,9 +58,10 @@ Supra Spike leverages **Move contracts** to provide seamless functionality for *
 - **Address**: `0x6e3e09ab7fd0145d7befc0c68d6944ddc1a90fd45b8a6d28c76d8c48bed676b0::ido`  
 - **Description**: Handles **token distributions** during the IDO phase to ensure **fair and transparent launches**.  
 
+🚀 **This IDO is exclusively for our token, Spike**. We are committed to ensuring a **secure, community-driven launch**, with fair distribution and strong ecosystem integration.  
+
 For more details about **tokenomics and contract functionality**, check out our **[Medium page](https://medium.com/@supraspike.fun/spike-tokenomics-and-contracts-bb7b8f15527e)**.  
 
----
 
 ## 🔹 Tokenomics & Distribution  
 
@@ -69,14 +72,22 @@ We are committed to **transparency and fairness** in all our launches.
 
 ## 👥 The Team  
 
-The **Supra Spike** team consists of **dedicated builders and community leaders**:  
+The **Supra Spike** team is composed of **experienced crypto builders and community leaders** who have been actively involved in the space for a long time.  
 
-👨‍💻 **1 Developer** – Focused on **building and maintaining the platform**.  
-📢 **3 Moderators** – Managing **community engagement** on **Telegram and Twitter**.  
+👨‍💻 **Development & Strategy** – Led by a dedicated builder focused on **smart contracts and platform UIX**.  
+📢 **Community & Engagement** – Managed by a passionate team ensuring **strong community support on Telegram and Twitter**.  
 
-We have been actively working on this project **since the launch of the Supra mainnet**, positioning ourselves as **early adopters and key contributors** to the ecosystem.  
+Our team includes well-known figures in the **DeFi and crypto ecosystem**:  
 
----
+- 🛠 **Daniela DeFi** – [@chicablockchain](https://x.com/chicablockchain)  
+- 🎭 **Snabur** – [@ZAMBURXD](https://x.com/ZAMBURXD)  
+- 💡 **Maira** – [@criptoMaira](https://x.com/criptoMaira)  
+- 🔥 **Jaione** – [@jaionee](https://x.com/jaionee)  
+
+We have been actively building since the **launch of Supra mainnet**.  
+
+---  
+
 
 ## 🎯 Our Vision  
 
@@ -91,6 +102,32 @@ We are committed to making Supra **the go-to blockchain for token launches**—n
 
 ---
 
+```mermaid
+graph TD;
+    
+    subgraph User Interface
+        A[Frontend] 
+    end
+
+    subgraph Backend
+        B[Supabase - Database] 
+        C[Railway Listener]
+    end
+
+    subgraph Blockchain
+        D[SUPRA Blockchain]
+        D1[pump_fa Contract]
+        D2[airdroper Contract]
+    end
+
+    A -->|Fetch Data| B
+    A -->|Trigger Events| C
+    C -->|Listen to Events| D
+    D -->|Smart Contracts| D1
+    D -->|Smart Contracts| D2
+    C -->|Process & Store Data| B
+
+
 ## 📢 Join the Movement  
 
 Be part of **Supra Spike** and help shape the **future of token launches**!  
@@ -101,5 +138,3 @@ Be part of **Supra Spike** and help shape the **future of token launches**!
 📝 **Medium**: [Read our insights](https://medium.com/@supraspike.fun/spike-tokenomics-and-contracts-bb7b8f15527e)  
 
 ---
-
-Let’s **build, launch, and innovate**—together. 🚀🔥  
