@@ -70,21 +70,26 @@ We are committed to **transparency and fairness** in all our launches.
 
 ---
 
-## 👥 The Team  
+## 💼 Team Roles
 
-The **Supra Spike** team is composed of **experienced crypto builders and community leaders** who have been actively involved in the space for a long time.  
+- **👨‍💻 Development & Strategy** – Led by a dedicated builder focused on **smart contracts** and **platform UI/UX**.
+- **📢 Community & Engagement** – Managed by a passionate team ensuring **strong community support on Telegram and Twitter**.
 
-👨‍💻 **Development & Strategy** – Led by a dedicated builder focused on **smart contracts and platform UIX**.  
-📢 **Community & Engagement** – Managed by a passionate team ensuring **strong community support on Telegram and Twitter**.  
+## 🎬 Team Video Presentation
 
-Our team: **DeFi and crypto ecosystem**:  
+Check out our team introduction and demo in the following video:
+[Video Presentation](https://youtu.be/Jw08FY1TR5k)
 
-- 🛠 **Daniela DeFi** – [@chicablockchain](https://x.com/chicablockchain)  
-- 🎭 **Snabur** – [@ZAMBURXD](https://x.com/ZAMBURXD)  
-- 💡 **Maira** – [@criptoMaira](https://x.com/criptoMaira)  
-- 🔥 **Jaione** – [@jaionee](https://x.com/jaionee)  
+## 🚀 Our Team: DeFi and Crypto Ecosystem
 
-We have been actively building since the **launch of Supra mainnet**.  
+We are constantly innovating and building since the **launch of Supra mainnet**.
+
+- 🛠 **Daniela DeFi** – [@chicablockchain](https://x.com/chicablockchain)
+- 🎭 **Snabur** – [@ZAMBURXD](https://x.com/ZAMBURXD)
+- 💡 **Maira** – [@criptoMaira](https://x.com/criptoMaira)
+- 🔥 **Jaione** – [@jaionee](https://x.com/jaionee)
+
+We have been actively building and contributing to the **DeFi** and **crypto ecosystem**.
 
 ---  
 
