@@ -1,10 +1,11 @@
-module pump::pump_fa {
+module pump::pump_sup {
     use aptos_std::simple_map::{Self, SimpleMap};
 
     use std::signer::address_of;
     use std::string;
     use std::string::String;
     use std::vector;
+    use std::option::{Self, Option};
     use aptos_std::math64;
     use aptos_std::type_info::type_name;
     use supra_framework::account;
@@ -14,8 +15,8 @@ module pump::pump_fa {
     use supra_framework::coin::Coin;
     use supra_framework::event;
     use supra_framework::timestamp;
-    // use pump::dex;
     use pump::Liquid_Staking_Token;
+    use spike_amm::amm_router;
 
     //errors
     const ERROR_INVALID_LENGTH: u64 = 1;
@@ -59,7 +60,8 @@ module pump::pump_fa {
         dex_transfer_threshold: u64,
         wait_duration: u64, // 8 hours = 28800 seconds
         min_supra_amount: u64, // Minimum purchase amount = 100_000_000 (1 SUPRA)
-        high_fee: u64 // High fee rate period fee = 1000 (10%)
+        high_fee: u64, // High fee rate period fee = 1000 (10%)
+        deadline: u64
     }
 
     struct TokenList has key, store {
@@ -72,7 +74,8 @@ module pump::pump_fa {
         virtual_supra_reserves: u64,
         is_completed: bool,
         is_normal_dex: bool,
-        dev: address
+        dev: address,
+        last_buyer: Option<LastBuyer>
     }
 
     struct TokenPairRecord has key, store, copy {
@@ -88,7 +91,7 @@ module pump::pump_fa {
     }
 
     // struct to track the last buyer
-    struct LastBuyer has key, drop {
+    struct LastBuyer has store, copy, drop {
         buyer: address,
         timestamp: u64,
         token_amount: u64
@@ -170,7 +173,17 @@ module pump::pump_fa {
         );
         let reserve_diff = token_reserves - token_amount;
         assert!(reserve_diff > 0, ERROR_INSUFFICIENT_LIQUIDITY);
-        ((supra_reserves * token_reserves) / reserve_diff) - supra_reserves
+
+        let div_part1 = ((supra_reserves * token_reserves) / reserve_diff);
+        let div_part2 = ((supra_reserves * token_reserves * 100) / reserve_diff);
+        
+        let result = if (div_part1 * 100 < div_part2) {
+            div_part1 + 1
+        } else {
+            div_part1
+        };
+
+        result - supra_reserves
     }
 
     /*
@@ -189,8 +202,15 @@ module pump::pump_fa {
             ERROR_INSUFFICIENT_LIQUIDITY
         );
 
-        supra_reserves - ((token_reserves * supra_reserves) / (token_value
-            + token_reserves))
+        let div_part1 = (token_reserves * supra_reserves) / (token_value + token_reserves);
+        let div_part2 = (token_reserves * supra_reserves * 100) / (token_value + token_reserves);
+        let result = if (div_part1 * 100 < div_part2) {
+            div_part1 + 1
+        } else {
+            div_part1
+        };
+
+        supra_reserves - result
     }
 
     /*
@@ -208,8 +228,15 @@ module pump::pump_fa {
             token_reserves > 0 && supra_reserves > 0 && supra_value > 0,
             ERROR_INSUFFICIENT_LIQUIDITY
         );
-        token_reserves - ((token_reserves * supra_reserves) / (supra_value
-            + supra_reserves))
+
+        let div_part1 = (token_reserves * supra_reserves) / (supra_value + supra_reserves);
+        let div_part2 = (token_reserves * supra_reserves * 100) / (
+            supra_value + supra_reserves
+        );
+        if (div_part1 * 100 < div_part2) {
+            div_part1 = div_part1 + 1;
+        };
+        token_reserves - div_part1
     }
 
     /*
@@ -237,7 +264,7 @@ module pump::pump_fa {
         let initial_k = (initial_meme as u128) * (initial_supra as u128);
         let final_k = (final_meme as u128) * (final_supra as u128);
 
-        assert!(final_k <= initial_k, ERROR_INSUFFICIENT_LIQUIDITY);
+        assert!(final_k >= initial_k, ERROR_INSUFFICIENT_LIQUIDITY);
     }
 
     //Initialize module with admin account
@@ -275,10 +302,11 @@ module pump::pump_fa {
                 initial_virtual_token_reserves: 100_000_000 * DECIMALS,
                 initial_virtual_supra_reserves: 30 * DECIMALS,
                 token_decimals: 8,
-                dex_transfer_threshold: 1 * DECIMALS,
+                dex_transfer_threshold: 1_370_000 * DECIMALS,
                 wait_duration: 28800, // 8 hours = 28800 seconds
-                min_supra_amount: 100_000_000, // Minimum purchase amount = 100_000_000 (1 SUPRA)
-                high_fee: 1000 // High fee rate period fee = 1000 (10%)
+                min_supra_amount: 1_370_000, // Minimum purchase amount = 1_370_000 (1 SUPRA)
+                high_fee: 1000, // High fee rate period fee = 1000 (10%)
+                deadline: 10800 // 3 hours = 10800 seconds
             }
         );
 
@@ -290,6 +318,7 @@ module pump::pump_fa {
             real_supra_reserves: simple_map::create()
         };
         move_to(&resource_account, pool_record);
+        coin::register<SupraCoin>(&resource_account);
     }
 
     #[view]
@@ -300,8 +329,7 @@ module pump::pump_fa {
             Liquid_Staking_Token::get_fa_obj_address(token_in_name, token_in_symbol);
         let config = borrow_global<PumpConfig>(@pump);
 
-        let resource = account::create_signer_with_capability(&config.resource_cap);
-        let resource_addr = address_of(&resource);
+        let resource_addr = account::get_signer_capability_address(&config.resource_cap);
         assert!(exists<PoolRecord>(resource_addr), ERROR_PUMP_NOT_EXIST);
 
         let pool_record = borrow_global_mut<PoolRecord>(resource_addr);
@@ -330,8 +358,7 @@ module pump::pump_fa {
         let token_addr =
             Liquid_Staking_Token::get_fa_obj_address(token_in_name, token_in_symbol);
         let config = borrow_global<PumpConfig>(@pump);
-        let resource = account::create_signer_with_capability(&config.resource_cap);
-        let resource_addr = address_of(&resource);
+        let resource_addr = account::get_signer_capability_address(&config.resource_cap);
         assert!(exists<PoolRecord>(resource_addr), ERROR_PUMP_NOT_EXIST);
 
         let pool_record = borrow_global_mut<PoolRecord>(resource_addr);
@@ -358,8 +385,7 @@ module pump::pump_fa {
             Liquid_Staking_Token::get_fa_obj_address(token_in_name, token_in_symbol);
         let config = borrow_global<PumpConfig>(@pump);
 
-        let resource = account::create_signer_with_capability(&config.resource_cap);
-        let resource_addr = address_of(&resource);
+        let resource_addr = account::get_signer_capability_address(&config.resource_cap);
         assert!(exists<PoolRecord>(resource_addr), ERROR_PUMP_NOT_EXIST);
 
         let pool_record = borrow_global_mut<PoolRecord>(resource_addr);
@@ -385,9 +411,7 @@ module pump::pump_fa {
         let token_addr =
             Liquid_Staking_Token::get_fa_obj_address(token_in_name, token_in_symbol);
         let config = borrow_global<PumpConfig>(@pump);
-        let resource = account::create_signer_with_capability(&config.resource_cap);
-        let resource_addr = address_of(&resource);
-
+        let resource_addr = account::get_signer_capability_address(&config.resource_cap);
         assert!(exists<PoolRecord>(resource_addr), ERROR_PUMP_NOT_EXIST);
 
         let pool_record = borrow_global_mut<PoolRecord>(resource_addr);
@@ -412,9 +436,7 @@ module pump::pump_fa {
         let token_addr =
             Liquid_Staking_Token::get_fa_obj_address(token_in_name, token_in_symbol);
         let config = borrow_global<PumpConfig>(@pump);
-        let resource = account::create_signer_with_capability(&config.resource_cap);
-        let resource_addr = address_of(&resource);
-
+        let resource_addr = account::get_signer_capability_address(&config.resource_cap);
         assert!(exists<PoolRecord>(resource_addr), ERROR_PUMP_NOT_EXIST);
 
         let pool_record = borrow_global_mut<PoolRecord>(resource_addr);
@@ -464,9 +486,7 @@ module pump::pump_fa {
             Liquid_Staking_Token::get_fa_obj_address(token_in_name, token_in_symbol);
 
         let config = borrow_global<PumpConfig>(@pump);
-        let resource = account::create_signer_with_capability(&config.resource_cap);
-        let resource_addr = address_of(&resource);
-
+        let resource_addr = account::get_signer_capability_address(&config.resource_cap);
         assert!(exists<PoolRecord>(resource_addr), ERROR_PUMP_NOT_EXIST);
 
         let pool_record = borrow_global_mut<PoolRecord>(resource_addr);
@@ -524,37 +544,50 @@ module pump::pump_fa {
 
     // Get last buyer information
     #[view]
-    public fun get_last_buyer(): (address, u64, u64) acquires PumpConfig, LastBuyer {
+    public fun get_last_buyer(
+        token_in_name: String,
+        token_in_symbol: String
+    ): (address, u64, u64) acquires PumpConfig, PoolRecord {
+        let token_addr = Liquid_Staking_Token::get_fa_obj_address(token_in_name, token_in_symbol);
         let config = borrow_global<PumpConfig>(@pump);
-        let resource = account::create_signer_with_capability(&config.resource_cap);
-        let resource_addr = address_of(&resource);
-
-        assert!(exists<LastBuyer>(resource_addr), ERROR_NO_LAST_BUYER);
-        let last_buyer = borrow_global<LastBuyer>(resource_addr);
-
-        (last_buyer.buyer, last_buyer.timestamp + config.wait_duration, last_buyer.token_amount)
+        let resource_addr = account::get_signer_capability_address(&config.resource_cap);
+        
+        let pool_record = borrow_global<PoolRecord>(resource_addr);
+        let token_pair_record = simple_map::borrow(&pool_record.records, &token_addr);
+        let pool = token_pair_record.pool;
+        
+        if (option::is_none(&pool.last_buyer)) {
+            return (@0x0, 0, 0)
+        };
+        
+        let last_buyer = option::borrow(&pool.last_buyer);
+        (
+            last_buyer.buyer,
+            last_buyer.timestamp + config.wait_duration,
+            last_buyer.token_amount
+        )
     }
 
     // Get current pump stage
     #[view]
     public fun get_pump_stage(
-        token_in_name: String, token_in_symbol: String
-    ): u8 acquires PumpConfig, PoolRecord, LastBuyer {
+        token_in_name: String,
+        token_in_symbol: String
+    ): u8 acquires PumpConfig, PoolRecord {
         let config = borrow_global<PumpConfig>(@pump);
-        let resource = account::create_signer_with_capability(&config.resource_cap);
-        let resource_addr = address_of(&resource);
-
-        let token_addr =
-            Liquid_Staking_Token::get_fa_obj_address(token_in_name, token_in_symbol);
-
-        assert!(exists<PoolRecord>(resource_addr), ERROR_PUMP_NOT_EXIST);
-
-        let pool_record = borrow_global_mut<PoolRecord>(resource_addr);
-        let real_supra_reserves =
-            simple_map::borrow<address, Coin<SupraCoin>>(
-                &mut pool_record.real_supra_reserves, &token_addr
-            );
-
+        let resource_addr = account::get_signer_capability_address(&config.resource_cap);
+        let token_addr = Liquid_Staking_Token::get_fa_obj_address(token_in_name, token_in_symbol);
+        
+        let pool_record = borrow_global<PoolRecord>(resource_addr);
+        let token_pair_record = simple_map::borrow(&pool_record.records, &token_addr);
+        let pool = token_pair_record.pool;
+        
+        // Stage 4: Pool completed
+        if (pool.is_completed) {
+            return 4
+        };
+        
+        let real_supra_reserves = simple_map::borrow(&pool_record.real_supra_reserves, &token_addr);
         let current_supra_balance = coin::value<SupraCoin>(real_supra_reserves);
 
         // Stage 1: Before reaching threshold
@@ -563,8 +596,8 @@ module pump::pump_fa {
         };
 
         // Stage 2: After threshold but before wait duration
-        if (exists<LastBuyer>(resource_addr)) {
-            let last_buyer = borrow_global<LastBuyer>(resource_addr);
+        if (option::is_some(&pool.last_buyer)) {
+            let last_buyer = option::borrow(&pool.last_buyer);
             let current_time = timestamp::now_seconds();
 
             if (current_time < last_buyer.timestamp + config.wait_duration) {
@@ -578,7 +611,6 @@ module pump::pump_fa {
         // Stage 2: After threshold but no last buyer yet
         1
     }
-
     /*
     Deploy a new MEME token and create its pool
     */
@@ -602,8 +634,7 @@ module pump::pump_fa {
         assert!(!(string::length(&twitter) > 100), ERROR_INVALID_LENGTH);
 
         let config = borrow_global<PumpConfig>(@pump);
-        let resource = account::create_signer_with_capability(&config.resource_cap);
-        let resource_addr = address_of(&resource);
+        let resource_addr = account::get_signer_capability_address(&config.resource_cap);
         assert!(exists<PoolRecord>(resource_addr), ERROR_PUMP_NOT_EXIST);
         let sender = address_of(caller);
 
@@ -624,7 +655,8 @@ module pump::pump_fa {
             virtual_supra_reserves: config.initial_virtual_supra_reserves,
             is_completed: false,
             is_normal_dex: false,
-            dev: sender
+            dev: sender,
+            last_buyer: option::none()
         };
 
         let token_pair_record = TokenPairRecord {
@@ -676,10 +708,8 @@ module pump::pump_fa {
             token_out_amount > 0 && supra_in_amount > 0,
             ERROR_PUMP_AMOUNT_IS_NULL
         );
-        
         let initial_virtual_token = pool.virtual_token_reserves;
         let initial_virtual_supra = pool.virtual_supra_reserves;
-
         if (supra_in_amount > 0) {
             pool.virtual_supra_reserves = pool.virtual_supra_reserves + supra_in_amount;
         };
@@ -703,7 +733,7 @@ module pump::pump_fa {
         token_in_name: String,
         token_in_symbol: String,
         buy_token_amount: u64
-    ) acquires PumpConfig, PoolRecord, Handle, LastBuyer {
+    ) acquires PumpConfig, PoolRecord, Handle {
         assert!(buy_token_amount > 0, ERROR_PUMP_AMOUNT_IS_NULL);
         let token_addr =
             Liquid_Staking_Token::get_fa_obj_address(token_in_name, token_in_symbol);
@@ -734,33 +764,35 @@ module pump::pump_fa {
         let current_supra_balance = coin::value(real_supra_reserves);
 
         // Check the minimum purchase amount
-        assert!(buy_token_amount >= config.min_supra_amount, ERROR_AMOUNT_TOO_LOW);
         let token_amount = math64::min(buy_token_amount, pool.real_token_reserves);
 
         // Check if the high fee period has started
         if (current_supra_balance >= config.dex_transfer_threshold) {
             // Check if the wait duration has passed since the last buy
-            if (exists<LastBuyer>(resource_addr)) {
-                let last_buyer = borrow_global<LastBuyer>(resource_addr);
+            if (option::is_some(&pool.last_buyer)) {
+                let last_buyer = option::borrow(&pool.last_buyer);
                 let current_time = timestamp::now_seconds();
-                assert!(current_time - last_buyer.timestamp < config.wait_duration, ERROR_WAIT_DURATION_PASSED);
+                assert!(
+                    current_time - last_buyer.timestamp < config.wait_duration,
+                    ERROR_WAIT_DURATION_PASSED
+                );
             };
             
-            let liquidity_cost = calculate_add_liquidity_cost(
-                (pool.virtual_supra_reserves as u256),
-                (pool.virtual_token_reserves as u256),
-                (buy_token_amount as u256)
-            );
+            let liquidity_cost = 
+                calculate_add_liquidity_cost(
+                    (pool.virtual_supra_reserves as u256),
+                    (pool.virtual_token_reserves as u256),
+                    (buy_token_amount as u256)
+                );
 
             // Check the minimum purchase amount
-            //assert!((liquidity_cost as u64) >= config.min_supra_amount, ERROR_AMOUNT_TOO_LOW);
+            assert!(
+                (liquidity_cost as u64) >= config.min_supra_amount, ERROR_AMOUNT_TOO_LOW
+            );
 
             // Use high fee (10%)
-            let platform_fee = math64::mul_div(
-                (liquidity_cost as u64),
-                config.high_fee, 
-                10000
-            );
+            let platform_fee = 
+                math64::mul_div((liquidity_cost as u64), config.high_fee, 10000);
 
             // Total cost (liquidity cost + fee)
             let total_cost = (liquidity_cost as u64) + platform_fee;
@@ -770,25 +802,21 @@ module pump::pump_fa {
 
             let supra_in_amount = coin::value<SupraCoin>(&total_supra_coin);
             // Pass only liquidity_cost (without fee) to the pool calculation
-            get_token_by_sup(pool, (liquidity_cost as u64), token_amount);
-
+            get_token_by_sup(pool, supra_in_amount, token_amount);
             coin::merge<SupraCoin>(real_supra_reserves, total_supra_coin);
 
             // Update the last buyer information
-            if (exists<LastBuyer>(resource_addr)) {
-                let _last_buyer = move_from<LastBuyer>(resource_addr);
+            if (option::is_some(&pool.last_buyer)) {
+                let _last_buyer = option::borrow(&pool.last_buyer);
                 // Clean up previous records
             };
 
             // Record the new last buyer
-            move_to(
-                &resource,
-                LastBuyer {
-                    buyer: sender,
-                    timestamp: timestamp::now_seconds(),
-                    token_amount: token_amount
-                }
-            );
+            pool.last_buyer = option::some(LastBuyer {
+                buyer: sender,
+                timestamp: timestamp::now_seconds(),
+                token_amount: buy_token_amount
+            });
 
             Liquid_Staking_Token::mint(
                 sender,
@@ -814,11 +842,15 @@ module pump::pump_fa {
             return
         };
 
-        let liquidity_cost = calculate_add_liquidity_cost(
+        let liquidity_cost = 
+            calculate_add_liquidity_cost(
                 (pool.virtual_supra_reserves as u256),
                 (pool.virtual_token_reserves as u256),
                 (token_amount as u256)
             );
+
+        // Check the minimum purchase amount
+        assert!((liquidity_cost as u64) >= 10000, ERROR_AMOUNT_TOO_LOW);
 
         let platform_fee =
             math64::mul_div(
@@ -832,7 +864,24 @@ module pump::pump_fa {
         let platform_fee_coin = coin::extract(&mut total_supra_coin, platform_fee);
 
         let supra_in_amount = coin::value<SupraCoin>(&total_supra_coin);
-        get_token_by_sup(pool, (liquidity_cost as u64), token_amount);
+
+        // Check if this buy will trigger the high fee period
+        let will_trigger_high_fee = current_supra_balance < config.dex_transfer_threshold && 
+            (current_supra_balance + supra_in_amount) >= config.dex_transfer_threshold;
+
+        // If this buy will trigger high fee period, record this buyer as LastBuyer
+        if (will_trigger_high_fee) {
+            if (option::is_some(&pool.last_buyer)) {
+                let _last_buyer = option::borrow(&pool.last_buyer);
+            };
+            pool.last_buyer = option::some(LastBuyer {
+                buyer: sender,
+                timestamp: timestamp::now_seconds(),
+                token_amount: buy_token_amount
+            });
+        };
+
+        get_token_by_sup(pool, supra_in_amount, token_amount);
         //here we need to fix total supra coin
         coin::merge<SupraCoin>(real_supra_reserves, total_supra_coin);
         // let token_amount = coin::value(&received_token);
@@ -872,7 +921,7 @@ module pump::pump_fa {
         token_in_symbol: String,
         buy_token_amount: u64,
         max_price_impact: u64
-    ) acquires PumpConfig, PoolRecord, Handle, LastBuyer {
+    ) acquires PumpConfig, PoolRecord, Handle {
         let price_impact =
             get_price_impact(
                 token_in_name,
@@ -928,22 +977,26 @@ module pump::pump_fa {
     ) acquires PumpConfig, PoolRecord, Handle {
         assert!(sell_token_amount > 0, ERROR_PUMP_AMOUNT_IS_NULL);
         
-        let token_addr = Liquid_Staking_Token::get_fa_obj_address(token_in_name, token_in_symbol);
+        let token_addr = 
+            Liquid_Staking_Token::get_fa_obj_address(token_in_name, token_in_symbol);
         let sender = address_of(caller);
         let config = borrow_global<PumpConfig>(@pump);
-        let resource = account::create_signer_with_capability(&config.resource_cap);
-        let resource_addr = address_of(&resource);
-        
+        let resource_addr = account::get_signer_capability_address(&config.resource_cap);
         assert!(exists<PoolRecord>(resource_addr), ERROR_PUMP_NOT_EXIST);
         
         let pool_record = borrow_global_mut<PoolRecord>(resource_addr);
         assert!(exists<PoolRecord>(resource_addr), ERROR_PUMP_NOT_EXIST); //added
-        let token_pair_record = simple_map::borrow_mut<address, TokenPairRecord>(
-            &mut pool_record.records, &token_addr
-        );
+        let token_pair_record = 
+            simple_map::borrow_mut<address, TokenPairRecord>(
+                &mut pool_record.records, &token_addr
+            );
         let pool = &mut token_pair_record.pool;
         
         assert!(!pool.is_completed, ERROR_PUMP_COMPLETED);
+        assert!(
+            sell_token_amount <= pool.virtual_token_reserves, 
+            ERROR_INSUFFICIENT_LIQUIDITY
+        );
         
         // Add balance check
         let token_balance = Liquid_Staking_Token::get_balance(
@@ -952,17 +1005,18 @@ module pump::pump_fa {
             token_pair_record.symbol
         );
         assert!(sell_token_amount <= token_balance, ERROR_INSUFFICIENT_BALANCE);
-        assert!(sell_token_amount <= pool.virtual_token_reserves, ERROR_INSUFFICIENT_LIQUIDITY);
 
-        let real_supra_reserves = simple_map::borrow_mut<address, Coin<SupraCoin>>(
-            &mut pool_record.real_supra_reserves, &token_addr
-        );
+
+        let real_supra_reserves = 
+            simple_map::borrow_mut<address, Coin<SupraCoin>>(
+                &mut pool_record.real_supra_reserves, &token_addr
+            );
         let current_supra_balance = coin::value(real_supra_reserves);
         
-        //assert!(
-        //    current_supra_balance > config.dex_transfer_threshold,
-        //    ERROR_NO_SELL_IN_HIGH_FEE_PERIOD
-        //);
+        assert!(
+            current_supra_balance <= config.dex_transfer_threshold,
+            ERROR_NO_SELL_IN_HIGH_FEE_PERIOD
+        );
 
         // Calculate SUPRA amount to receive
         let liquidity_remove =
@@ -973,6 +1027,9 @@ module pump::pump_fa {
                     (sell_token_amount as u256)
                 ) as u64
             );
+        
+        // Check the minimum purchase amount
+        assert!((liquidity_remove as u64) >= 10000, ERROR_AMOUNT_TOO_LOW);
 
         Liquid_Staking_Token::burn(
             sender,
@@ -1060,7 +1117,8 @@ module pump::pump_fa {
         new_dex_transfer_threshold: u64,
         new_high_fee: u64,
         new_wait_duration: u64,
-        new_min_supra_amount: u64
+        new_min_supra_amount: u64,
+        new_deadline: u64
     ) acquires PumpConfig {
         assert!(address_of(admin) == @pump, ERROR_NO_AUTH);
         let config = borrow_global_mut<PumpConfig>(@pump);
@@ -1074,14 +1132,14 @@ module pump::pump_fa {
         config.high_fee = new_high_fee;
         config.wait_duration = new_wait_duration;
         config.min_supra_amount = new_min_supra_amount;
+        config.deadline = new_deadline;
     }
 
     //Update DEX transfer threshold
     //@param admin - Admin signer with permission to update threshold
     //@param new_threshold - New threshold value for DEX transfer
     public entry fun update_dex_threshold(
-        admin: &signer,
-        new_threshold: u64
+        admin: &signer, new_threshold: u64
     ) acquires PumpConfig {
         assert!(address_of(admin) == @pump, ERROR_NO_AUTH);
         let config = borrow_global_mut<PumpConfig>(@pump);
@@ -1091,10 +1149,7 @@ module pump::pump_fa {
     //Update platform fee rate
     //@param admin - Admin signer with permission to update fee
     //@param new_fee - New platform fee rate (in basis points)
-    public entry fun update_platform_fee(
-        admin: &signer,
-        new_fee: u64
-    ) acquires PumpConfig {
+    public entry fun update_platform_fee(admin: &signer, new_fee: u64) acquires PumpConfig {
         assert!(address_of(admin) == @pump, ERROR_NO_AUTH);
         let config = borrow_global_mut<PumpConfig>(@pump);
         config.platform_fee = new_fee;
@@ -1104,8 +1159,7 @@ module pump::pump_fa {
     //@param admin - Admin signer with permission to update address
     //@param new_address - New address to receive platform fees
     public entry fun update_platform_fee_address(
-        admin: &signer,
-        new_address: address
+        admin: &signer, new_address: address
     ) acquires PumpConfig {
         assert!(address_of(admin) == @pump, ERROR_NO_AUTH);
         let config = borrow_global_mut<PumpConfig>(@pump);
@@ -1115,51 +1169,60 @@ module pump::pump_fa {
     // ========================================= Migration Part ========================================
     // Claim migration right
     public entry fun claim_migration_right(
+        caller: &signer,
         name: String,
         symbol: String
-    ) acquires PumpConfig, PoolRecord, Handle, LastBuyer {
+    ) acquires PumpConfig, PoolRecord, Handle {
         let config = borrow_global<PumpConfig>(@pump);
-        let resource = account::create_signer_with_capability(&config.resource_cap);
-        let resource_addr = address_of(&resource);
-        
-        assert!(exists<LastBuyer>(resource_addr), ERROR_NO_LAST_BUYER);
-        let last_buyer = borrow_global<LastBuyer>(resource_addr);
-        
+        let resource_addr = account::get_signer_capability_address(&config.resource_cap);
+        assert!(exists<PoolRecord>(resource_addr), ERROR_PUMP_NOT_EXIST);
+        let token_addr = Liquid_Staking_Token::get_fa_obj_address(name, symbol);
+        let pool_record = borrow_global_mut<PoolRecord>(resource_addr);
+        let token_pair_record = simple_map::borrow_mut<address, TokenPairRecord>(
+            &mut pool_record.records, &token_addr
+        );
+
+        assert!(option::is_some(&token_pair_record.pool.last_buyer), ERROR_NO_LAST_BUYER);
+        let last_buyer = option::borrow(&token_pair_record.pool.last_buyer);
+
         assert!(
             timestamp::now_seconds() >= last_buyer.timestamp + config.wait_duration,
             ERROR_WAIT_TIME_NOT_REACHED
         );
 
-        migrate_to_normal_dex(name, symbol);
+        let winner_address = last_buyer.buyer;
+        let real_supra_reserves = simple_map::borrow_mut<address, Coin<SupraCoin>>(
+            &mut pool_record.real_supra_reserves, &token_addr
+        );
+        migrate_to_spike_dex(
+            caller,
+            name,
+            symbol,
+            token_pair_record,
+            real_supra_reserves,
+            winner_address
+        );
     }
 
-    // Transfer movefun to normal dex if there is no dex support
-    fun migrate_to_normal_dex(
-        name: String,
-        symbol: String
-    ) acquires PumpConfig, PoolRecord, Handle, LastBuyer {
-        let config = borrow_global<PumpConfig>(@pump);
-        let resource = account::create_signer_with_capability(&config.resource_cap);
-        let resource_addr = address_of(&resource);
-        // check pool exists
-        assert!(exists<PoolRecord>(resource_addr), ERROR_PUMP_NOT_EXIST);
-
+    // Transfer supfun to normal dex if there is no dex support
+    fun migrate_to_spike_dex(
+        caller: &signer,
+        name: String, 
+        symbol: String,
+        token_pair_record: &mut TokenPairRecord,
+        real_supra_reserves: &mut Coin<SupraCoin>,
+        winner_address: address
+    ) acquires PumpConfig, Handle {
+        let sender = address_of(caller);
         let token_addr = Liquid_Staking_Token::get_fa_obj_address(name, symbol);
+        let config = borrow_global<PumpConfig>(@pump);
+        let resource_addr = account::get_signer_capability_address(&config.resource_cap);
+        let resource_signer = account::create_signer_with_capability(&config.resource_cap);
 
-        let pool_record = borrow_global_mut<PoolRecord>(resource_addr);
-        let token_pair_record =
-            simple_map::borrow<address, TokenPairRecord>(
-                &mut pool_record.records, &token_addr
-            );
-        let pool = token_pair_record.pool;
+        let pool = &mut token_pair_record.pool;
 
         // check pool is not completed
         assert!(!pool.is_completed, ERROR_PUMP_COMPLETED);
-
-        let real_supra_reserves =
-            simple_map::borrow_mut<address, Coin<SupraCoin>>(
-                &mut pool_record.real_supra_reserves, &token_addr
-            );
 
         let real_supra_amount = coin::value<SupraCoin>(real_supra_reserves);
 
@@ -1169,22 +1232,18 @@ module pump::pump_fa {
             ERROR_INSUFFICIENT_LIQUIDITY
         );
 
-        let virtual_price =
-            (pool.virtual_supra_reserves as u256) * 100_000_000
+        let virtual_price = 
+            (pool.virtual_supra_reserves as u256) * 100_000_000 
                 / (pool.virtual_token_reserves as u256);
 
         let required_token = (((real_supra_amount as u256) * 100_000_000 / virtual_price) as u64);
-        let burned_amount = pool.real_token_reserves - required_token;
-        // let sender = address_of(caller);
+        let burned_amount = pool.virtual_token_reserves - required_token;
         pool.is_completed = true;
-        pool.is_normal_dex = true;
 
-        // Calculate reward for caller (10% of the token amount)
-        let reward_amount = pool.real_token_reserves / 10;
+        // Calculate reward for winner (10% of the token amount)
+        let reward_amount = pool.virtual_token_reserves / 10;
 
-        let last_buyer = borrow_global<LastBuyer>(resource_addr);
-        let winner_address = last_buyer.buyer;
-
+        // Send reward to winner
         Liquid_Staking_Token::mint(
             winner_address,
             reward_amount,
@@ -1199,20 +1258,45 @@ module pump::pump_fa {
         // Store gas fee in resource account
         coin::deposit(resource_addr, gas_coin);
 
-        // Reset pool state
-        pool.virtual_supra_reserves = real_supra_amount - gas_amount;
-        pool.virtual_token_reserves = required_token;
+        // Store tokens in resource account
+        let real_supra_amount = coin::value<SupraCoin>(real_supra_reserves);
+        let real_supra = coin::extract<SupraCoin>(real_supra_reserves, real_supra_amount);
+        coin::deposit<SupraCoin>(resource_addr, real_supra);
 
-        pool.real_token_reserves = required_token;
+        // should mint required_token to dex
+        Liquid_Staking_Token::mint(
+            resource_addr,
+            required_token,
+            token_pair_record.name,
+            token_pair_record.symbol
+        );
 
-        // Emit reset event
+        amm_router::add_liquidity_supra(
+            &resource_signer,
+            // token: address,
+            token_addr,
+            // amount_token_desired: u64,
+            required_token,
+            // amount_token_min: u64,
+            0,
+            // amount_supra_desired: u64,
+            real_supra_amount,  // Removed gas_amount subtraction
+            // amount_supra_min: u64,
+            0,
+            // to: address,
+            resource_addr,
+            // deadline: u64,
+            timestamp::now_seconds() + config.deadline
+        );
+
+        // Emit transfer event
         event::emit_event(
             &mut borrow_global_mut<Handle>(@pump).transfer_events,
             TransferEvent {
-                supra_amount: real_supra_amount - gas_amount,
+                supra_amount: real_supra_amount,
                 token_address: token_addr,
                 token_amount: required_token,
-                user: winner_address, 
+                user: sender,
                 virtual_supra_reserves: pool.virtual_supra_reserves,
                 virtual_token_reserves: pool.virtual_token_reserves,
                 burned_amount
@@ -1220,162 +1304,4 @@ module pump::pump_fa {
         );
     }
 
-    // if there is no dex support, use normal buy
-    public entry fun normal_buy(
-        caller: &signer,
-        buy_token_amount: u64,
-        token_in_name: String,
-        token_in_symbol: String
-    ) acquires PumpConfig, PoolRecord, Handle {
-        assert!(buy_token_amount > 0, ERROR_PUMP_AMOUNT_IS_NULL);
-        let token_addr =
-            Liquid_Staking_Token::get_fa_obj_address(token_in_name, token_in_symbol);
-        let sender = address_of(caller);
-        let config = borrow_global<PumpConfig>(@pump);
-
-        if (!coin::is_account_registered<SupraCoin>(sender)) {
-            coin::register<SupraCoin>(caller);
-        };
-
-        let resource = account::create_signer_with_capability(&config.resource_cap);
-        let resource_addr = address_of(&resource);
-
-        let pool_record = borrow_global_mut<PoolRecord>(resource_addr);
-        let token_pair_record =
-            simple_map::borrow_mut<address, TokenPairRecord>(
-                &mut pool_record.records, &token_addr
-            );
-        let pool = &mut token_pair_record.pool;
-        assert!(pool.is_completed, ERROR_PUMP_NOT_COMPLETED);
-        assert!(pool.is_normal_dex, ERROR_NOT_NORMAL_DEX);
-
-        let real_supra_reserves =
-            simple_map::borrow_mut<address, Coin<SupraCoin>>(
-                &mut pool_record.real_supra_reserves, &token_addr
-            );
-
-        let liquidity_cost =
-            calculate_add_liquidity_cost(
-                (pool.virtual_supra_reserves as u256),
-                (pool.virtual_token_reserves as u256),
-                (buy_token_amount as u256)
-            );
-
-        let platform_fee =
-            math64::mul_div(
-                (liquidity_cost as u64),
-                config.platform_fee,
-                10000
-            );
-
-        let total_cost = (liquidity_cost as u64) + platform_fee;
-        let total_supra_coin = coin::withdraw<SupraCoin>(caller, total_cost);
-        let platform_fee_coin = coin::extract(&mut total_supra_coin, platform_fee);
-
-        let supra_in_amount = coin::value<SupraCoin>(&total_supra_coin);
-        get_token_by_sup(pool, (liquidity_cost as u64), buy_token_amount);
-        coin::merge<SupraCoin>(real_supra_reserves, total_supra_coin);
-
-        Liquid_Staking_Token::mint(
-            sender,
-            buy_token_amount,
-            token_pair_record.name,
-            token_pair_record.symbol
-        );
-        coin::deposit(config.platform_fee_address, platform_fee_coin);
-
-        event::emit_event(
-            &mut borrow_global_mut<Handle>(@pump).trade_events,
-            TradeEvent {
-                supra_amount: total_cost,
-                is_buy: true,
-                token_address: token_addr,
-                token_amount: buy_token_amount,
-                user: sender,
-                virtual_supra_reserves: pool.virtual_supra_reserves,
-                virtual_token_reserves: pool.virtual_token_reserves,
-                timestamp: timestamp::now_seconds()
-            }
-        );
-    }
-
-    // if there is no dex support, use normal sell
-    public entry fun normal_sell(
-        caller: &signer,
-        sell_token_amount: u64,
-        token_in_name: String,
-        token_in_symbol: String
-    ) acquires PumpConfig, PoolRecord, Handle {
-        let token_addr =
-            Liquid_Staking_Token::get_fa_obj_address(token_in_name, token_in_symbol);
-        let config = borrow_global<PumpConfig>(@pump);
-        let resource = account::create_signer_with_capability(&config.resource_cap);
-        let resource_addr = address_of(&resource);
-        let pool_record = borrow_global_mut<PoolRecord>(resource_addr);
-        let token_pair_record =
-            simple_map::borrow<address, TokenPairRecord>(
-                &mut pool_record.records, &token_addr
-            );
-        let pool = token_pair_record.pool;
-
-        let real_supra_reserves =
-            simple_map::borrow_mut<address, Coin<SupraCoin>>(
-                &mut pool_record.real_supra_reserves, &token_addr
-            );
-
-        let sender = address_of(caller);
-
-        assert!(sell_token_amount > 0, ERROR_PUMP_AMOUNT_IS_NULL);
-        assert!(exists<PoolRecord>(resource_addr), ERROR_PUMP_NOT_EXIST);
-        assert!(pool.is_completed, ERROR_PUMP_NOT_COMPLETED);
-        assert!(pool.is_normal_dex, ERROR_NOT_NORMAL_DEX);
-        assert!(
-            sell_token_amount <= pool.virtual_token_reserves,
-            ERROR_INSUFFICIENT_LIQUIDITY
-        );
-
-        // Check if the seller has enough token balance
-        let seller_token_balance = coin::balance<SupraCoin>(sender);
-        assert!(sell_token_amount <= seller_token_balance, ERROR_INSUFFICIENT_BALANCE);
-
-        let liquidity_remove =
-            calculate_sell_token(
-                (pool.virtual_token_reserves as u256),
-                (pool.virtual_supra_reserves as u256),
-                (sell_token_amount as u256)
-            );
-
-        Liquid_Staking_Token::burn(
-            sender,
-            sell_token_amount,
-            token_pair_record.name,
-            token_pair_record.symbol
-        );
-
-        // Execute swap
-        get_sup_by_token(&mut pool, sell_token_amount, (liquidity_remove as u64));
-
-        let platform_fee =
-            math64::mul_div((liquidity_remove as u64), config.platform_fee, 10000);
-        let supra_to_user =
-            coin::extract<SupraCoin>(real_supra_reserves, (liquidity_remove as u64));
-        let supra_amount = coin::value<SupraCoin>(&supra_to_user);
-        let platform_fee_coin = coin::extract<SupraCoin>(&mut supra_to_user, platform_fee);
-
-        coin::deposit(config.platform_fee_address, platform_fee_coin);
-        coin::deposit(sender, supra_to_user);
-        event::emit_event(
-            &mut borrow_global_mut<Handle>(@pump).trade_events,
-            TradeEvent {
-                supra_amount,
-                is_buy: false,
-                token_address: token_addr,
-                token_amount: sell_token_amount,
-                user: sender,
-                virtual_supra_reserves: pool.virtual_supra_reserves,
-                virtual_token_reserves: pool.virtual_token_reserves,
-                timestamp: timestamp::now_seconds()
-            }
-        );
-    }
 }
