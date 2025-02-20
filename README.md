@@ -41,7 +41,7 @@ Supra Spike leverages **Move contracts** to provide seamless functionality for *
 
 ### 🔹 Pump FA Contract  
 
-- **Address**: `0x6e3e09ab7fd0145d7befc0c68d6944ddc1a90fd45b8a6d28c76d8c48bed676b0::pump_fa`  
+- **Address**: `0x6e3e09ab7fd0145d7befc0c68d6944ddc1a90fd45b8a6d28c76d8c48bed676b0::pump_sup`  
 - **Functions**:  
   - `deploy` – Used for creating tokens.  
   - `buy` & `sell` – Enables users to trade tokens.  
@@ -135,7 +135,7 @@ graph TD;
 
     subgraph Blockchain
         D[🔗 SUPRA Blockchain]
-        D1[⚡ pump_fa Contract]
+        D1[⚡ pump_sup Contract]
         D2[💧 AMM Liquidity Pool]
     end
 
@@ -171,7 +171,7 @@ graph TD;
 
     subgraph Blockchain
         D[🔗 SUPRA Blockchain]
-        D1[⚡ pump_fa Contract]
+        D1[⚡ pump_sup Contract]
         D2[💧 AMM Liquidity Pool]
     end
 
