@@ -72,10 +72,18 @@ module IDO::ido {
     public entry fun joinIdo<Currency, CoinType>(sender: &signer, amount: u64) acquires IDO_INFO{
         assert!(exists<IDO_INFO<Currency, CoinType>>(MODULE_ADMIN), ERROR_COIN_NOT_INITIALIZED);
         let idoInfo = borrow_global_mut<IDO_INFO<Currency, CoinType>>(MODULE_ADMIN);
-
-        let depositCoin = coin::withdraw<Currency>(sender, amount*idoInfo.price/P7);
+    
+        let depositCoin = coin::withdraw<Currency>(sender, amount * idoInfo.price / P7);
         coin::deposit(MODULE_ADMIN, depositCoin);
-        table::upsert(&mut idoInfo.whiteList, signer::address_of(sender), amount);
+    
+        let user_addr = signer::address_of(sender);
+        let current_amount = if (table::contains(&idoInfo.whiteList, user_addr)) {
+            *table::borrow(&idoInfo.whiteList, user_addr)
+        } else {
+            0
+        };
+        let new_amount = current_amount + amount;
+        table::upsert(&mut idoInfo.whiteList, user_addr, new_amount);
     }
 
     public entry fun claim<Currency, CoinType>(sender: &signer) acquires IDO_INFO {
