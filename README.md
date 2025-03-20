@@ -118,7 +118,8 @@ Be part of **Supra Spike** and help shape the **future of token launches**!
 
 
 ```mermaid
-graph TD
+graph TD;
+
     subgraph Launcher
         A[User] --> B[Access Supraspike]
         B --> C[Create Meme]
