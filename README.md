@@ -118,7 +118,7 @@ Be part of **Supra Spike** and help shape the **future of token launches**!
 
 
 ```mermaid
-Grapg TD;
+GrapH TD;
 
     subgraph Launcher
         A[User] --> B[Access Supraspike]
