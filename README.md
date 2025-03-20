@@ -117,8 +117,7 @@ Be part of **Supra Spike** and help shape the **future of token launches**!
 ---
 
 
----
-
+```mermaid
 graph TD;
     
     subgraph User Interface
