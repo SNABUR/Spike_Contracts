@@ -118,33 +118,27 @@ Be part of **Supra Spike** and help shape the **future of token launches**!
 
 
 ```mermaid
-graph TD
-    %% AMM Platform: Supraswap (left)
+graph LR
+    %% Launcher Platform: Supraspike (right side)
+    subgraph Launcher [Launcher Platform: Supraspike]
+        A[User] --> B[Access Supraspike]
+        B --> C[Create Meme]
+        C --> D[Breaks the Bounding Curve]
+    end
+
+    %% AMM Platform: Supraswap (left side)
     subgraph AMM [AMM Platform: Supraswap]
         E[Pool Created]
-        F[LP Tokens Burned]
-        G[Fee Rewards Collected to External Contract]
-        H[External Contract uses dVRF to Reward Users]
-        I[Users Receive Rewards: Fungible Assets]
+        E --> F[LP Tokens Burned]
+        F --> G[Fee Rewards Collected to External Contract]
+        G --> H[External Contract uses dVRF to Reward Users]
+        H --> I[Users Receive Rewards: Fungible Assets]
     end
 
-    %% Launcher Platform: Supraspike (right)
-    subgraph Launcher [Launcher Platform: Supraspike]
-        A[User]
-        B[Access Supraspike]
-        C[Create Meme]
-        D[Breaks the Bounding Curve]
-    end
-
-    %% Flow connecting Launcher to AMM
-    A --> B
-    B --> C
-    C --> D
+    %% Connecting flow from Launcher to AMM
     D -- Sends Pool to --> E
-    E --> F
-    F --> G
-    G --> H
-    H --> I
+
+    %% Final classification step
     I --> J[AI Classifies Projects in UIX]
 
 
