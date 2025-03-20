@@ -118,8 +118,7 @@ Be part of **Supra Spike** and help shape the **future of token launches**!
 
 
 ```mermaid
-GrapH TD;
-
+graph TD
     subgraph Launcher
         A[User] --> B[Access Supraspike]
         B --> C[Create Meme]
@@ -134,6 +133,7 @@ GrapH TD;
     end
 
     H --> I[AI Classifies Projects in UIX]
+
 
 ```
 
