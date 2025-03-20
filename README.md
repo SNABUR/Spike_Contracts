@@ -118,31 +118,29 @@ Be part of **Supra Spike** and help shape the **future of token launches**!
 
 
 ```mermaid
-graph TD;
-    
+graph TD
     subgraph User_Interface
-        A[🌍 Frontend (UIX)]
-        AI[🤖 AI Project Classifier]
+        A["🌍 Frontend (UIX)"]
+        AI["🤖 AI Project Classifier"]
     end
 
     subgraph User_Actions
-        U1[🚀 Use Supraspike to create meme]
+        U1["🚀 Use Supraspike to create meme"]
     end
 
     subgraph Backend
-        B[📦 Supabase - Database]
-        C[🎧 Railway Listeners]
-        D[🔄 dVRF Fee Rewards Collector]
+        B["📦 Supabase - Database"]
+        C["🎧 Railway Listeners"]
+        D["🔄 dVRF Fee Rewards Collector"]
     end
 
     subgraph Blockchain
-        BL[🔗 SUPRA Blockchain]
-        BC[📈 Bonding Curve]
-        PSC[⚡ pump_sup Contract]
-        LP[💧 Supraswap Liquidity Pool (with Burned LP Tokens)]
+        BL["🔗 SUPRA Blockchain"]
+        BC["📈 Bonding Curve"]
+        PSC["⚡ pump_sup Contract"]
+        LP["💧 Supraswap Liquidity Pool (with Burned LP Tokens)"]
     end
 
-    %% Flow Connections
     U1 --> A
     A -->|Fetch Pools & Interact| B
     A -->|User Interactions| C
@@ -153,6 +151,7 @@ graph TD;
     PSC -->|Auto-Create Pool| LP
     C -->|Collect Fee Rewards| D
     D -->|Distribute Rewards| B
+
 
 ```
 
