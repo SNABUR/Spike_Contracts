@@ -118,7 +118,7 @@ Be part of **Supra Spike** and help shape the **future of token launches**!
 
 
 ```mermaid
-graph LR
+graph LR;
     %% Define the AMM platform (Supraswap) on the left
     subgraph AMM [AMM Platform: Supraswap]
         E[Pool Created]
