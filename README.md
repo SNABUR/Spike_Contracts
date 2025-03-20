@@ -119,33 +119,42 @@ Be part of **Supra Spike** and help shape the **future of token launches**!
 
 ---
 
-### Diagrama 1: Platform Architecture
-
-```mermaid
 graph TD;
     
     subgraph User Interface
-        A[🌍 Frontend] 
+        A[🌍 Frontend (UIX)]
+        AI[🤖 AI Project Classifier]
+    end
+
+    subgraph User Actions
+        U1[🚀 Use Supraspike to create meme]
     end
 
     subgraph Backend
-        B[📦 Supabase - Database] 
+        B[📦 Supabase - Database]
         C[🎧 Railway Listeners]
+        D[🔄 dVRF Fee Rewards Collector]
     end
 
     subgraph Blockchain
-        D[🔗 SUPRA Blockchain]
-        D1[⚡ pump_sup Contract]
-        D2[💧 AMM Liquidity Pool]
+        BL[🔗 SUPRA Blockchain]
+        BC[📈 Bonding Curve]
+        PSC[⚡ pump_sup Contract]
+        LP[💧 Supraswap Liquidity Pool<br/>(with Burned LP Tokens)]
     end
 
-    A -->|🔄 Fetch Pools| B
-    A -->|🚀 User Interactions| C
-    C -->|🎯 Listen to Events| D
-    D -->|💰 Bonding Curve Reaches Target| D1
-    D1 -->|🔄 Auto-Create Pool| D2
-    C -->|📊 Update Data| B
- ```
+    %% Flow Connections
+    U1 --> A
+    A -->|Fetch Pools & Interact| B
+    A -->|User Interactions| C
+    A -->|Classify Projects| AI
+    C -->|Listen to Blockchain Events| BL
+    BL -->|Bonding Curve Break Trigger| BC
+    BC -->|Activate Pool Creation| PSC
+    PSC -->|Auto-Create Pool| LP
+    C -->|Collect Fee Rewards| D
+    D -->|Distribute Rewards| B
+
 
 ## 🚀 SupraSpike Platform Flow Diagram
 
