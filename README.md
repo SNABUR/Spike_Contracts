@@ -118,39 +118,21 @@ Be part of **Supra Spike** and help shape the **future of token launches**!
 
 
 ```mermaid
-graph TD
-    subgraph User_Interface
-        A["🌍 Frontend (UIX)"]
-        AI["🤖 AI Project Classifier"]
+flowchart LR
+    subgraph Launcher[Launcher Platform (Supraspike)]
+        A[User] --> B[Access Supraspike]
+        B --> C[Create Meme]
+        C --> D[Breaks the Bounding Curve]
     end
 
-    subgraph User_Actions
-        U1["🚀 Use Supraspike to create meme"]
+    subgraph AMM[AMM Platform (Supraswap)]
+        D --> E[Pool Created]
+        E --> F[LP Tokens Burned]
+        F --> G[Fee Rewards Collected via dVRF]
+        G --> H[Users Receive Rewards (Fungible Assets)]
     end
 
-    subgraph Backend
-        B["📦 Supabase - Database"]
-        C["🎧 Railway Listeners"]
-        D["🔄 dVRF Fee Rewards Collector"]
-    end
-
-    subgraph Blockchain
-        BL["🔗 SUPRA Blockchain"]
-        BC["📈 Bonding Curve"]
-        PSC["⚡ pump_sup Contract"]
-        LP["💧 Supraswap Liquidity Pool (with Burned LP Tokens)"]
-    end
-
-    U1 --> A
-    A -->|Fetch Pools & Interact| B
-    A -->|User Interactions| C
-    A -->|Classify Projects| AI
-    C -->|Listen to Blockchain Events| BL
-    BL -->|Bonding Curve Break Trigger| BC
-    BC -->|Activate Pool Creation| PSC
-    PSC -->|Auto-Create Pool| LP
-    C -->|Collect Fee Rewards| D
-    D -->|Distribute Rewards| B
+    H --> I[AI Classifies Projects in UIX]
 
 
 ```
