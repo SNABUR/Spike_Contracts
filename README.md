@@ -118,15 +118,14 @@ Be part of **Supra Spike** and help shape the **future of token launches**!
 
 
 ```mermaid
-graph TD;
-
+graph TD
     %% AMM Platform: Supraswap (left)
     subgraph AMM [AMM Platform: Supraswap]
         E[Pool Created]
         F[LP Tokens Burned]
         G[Fee Rewards Collected to External Contract]
         H[External Contract uses dVRF to Reward Users]
-        I[Users Receive Rewards (Fungible Assets)]
+        I[Users Receive Rewards: Fungible Assets]
     end
 
     %% Launcher Platform: Supraspike (right)
