@@ -118,8 +118,9 @@ Be part of **Supra Spike** and help shape the **future of token launches**!
 
 
 ```mermaid
-graph LR;
-    %% Define the AMM platform (Supraswap) on the left
+graph TD;
+
+    %% AMM Platform: Supraswap (left)
     subgraph AMM [AMM Platform: Supraswap]
         E[Pool Created]
         F[LP Tokens Burned]
@@ -128,7 +129,7 @@ graph LR;
         I[Users Receive Rewards (Fungible Assets)]
     end
 
-    %% Define the Launcher platform (Supraspike) on the right
+    %% Launcher Platform: Supraspike (right)
     subgraph Launcher [Launcher Platform: Supraspike]
         A[User]
         B[Access Supraspike]
