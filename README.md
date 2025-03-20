@@ -154,6 +154,7 @@ graph TD;
     C -->|Collect Fee Rewards| D
     D -->|Distribute Rewards| B
 
+```
 
 
 ## 🚀 SupraSpike Platform Flow Diagram
