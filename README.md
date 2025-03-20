@@ -119,13 +119,13 @@ Be part of **Supra Spike** and help shape the **future of token launches**!
 
 ```mermaid
 flowchart LR
-    subgraph Launcher[Launcher Platform (Supraspike)]
+    subgraph Launcher
         A[User] --> B[Access Supraspike]
         B --> C[Create Meme]
         C --> D[Breaks the Bounding Curve]
     end
 
-    subgraph AMM[AMM Platform (Supraswap)]
+    subgraph AMM
         D --> E[Pool Created]
         E --> F[LP Tokens Burned]
         F --> G[Fee Rewards Collected via dVRF]
@@ -133,8 +133,6 @@ flowchart LR
     end
 
     H --> I[AI Classifies Projects in UIX]
-
-
 ```
 
 
