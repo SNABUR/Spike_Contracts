@@ -120,12 +120,12 @@ Be part of **Supra Spike** and help shape the **future of token launches**!
 ```mermaid
 graph TD;
     
-    subgraph User Interface
+    subgraph User_Interface
         A[🌍 Frontend (UIX)]
         AI[🤖 AI Project Classifier]
     end
 
-    subgraph User Actions
+    subgraph User_Actions
         U1[🚀 Use Supraspike to create meme]
     end
 
@@ -139,7 +139,7 @@ graph TD;
         BL[🔗 SUPRA Blockchain]
         BC[📈 Bonding Curve]
         PSC[⚡ pump_sup Contract]
-        LP[💧 Supraswap Liquidity Pool<br/>(with Burned LP Tokens)]
+        LP[💧 Supraswap Liquidity Pool (with Burned LP Tokens)]
     end
 
     %% Flow Connections
