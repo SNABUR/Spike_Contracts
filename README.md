@@ -154,47 +154,36 @@ Currently, our platform is in testnet. The flow diagram below explains the futur
 
 ```mermaid
 graph TD;
-    
-    subgraph User Interface
-        A[🌍 Frontend] 
-    end
 
-    subgraph Database & AI
-        B[📦 Supabase - Database] 
-        B1[🤖 AI Supervision - Filters Projects]
-    end
+    %% Interfaz de Usuario y Comunidad
+    UI[Frontend Dashboard]
+    VOTE[Comunidad vota con tokens SPIKE]
 
-    subgraph Backend
-        C[🎧 Railway Listeners]
-    end
+    %% Token Launcher Supra Spike
+    TL[Token Launcher (Supra Spike)]
+    VP[Virtual Pools Personalizables]
+    MEME[Meme Launch (Pools estándar)]
+    DAO[DAO Launch (Pools ampliados)]
 
-    subgraph Blockchain
-        D[🔗 SUPRA Blockchain]
-        D1[⚡ pump_sup Contract]
-        D2[💧 AMM Liquidity Pool]
-    end
+    %% AMM SupraSwap
+    AMM[AMM - SupraSwap]
+    FEES[Fees de LP quemados]
+    DVRF[Selección de recompensas (Supra DVRF)]
 
-    subgraph Token Launches
-        E1[🎭 Meme Launch - 5K Virtual Liquidity] 
-        E2[🏛 DAO Launch - 500K Liquidity]
-    end
+    %% Filtrado de ideas por IA
+    AI[IA - Filtrado y Curaduría de Ideas]
 
-    subgraph Governance
-        F[🗳 SPIKE Holders Voting] 
-        F1[🔒 Stake SPIKE for Voting Power]
-    end
-
-    A -->|🔄 Fetch Pools & Projects| B
-    A -->|🚀 User Selects Launch Type| D1
-    A -->|🗳 Users Vote on Projects| F
-    B -->|📊 AI Extracts Best Projects| B1
-    B1 -->|📝 Creates a Public List| A
-    C -->|🎯 Listen to Events| D
-    D -->|💰 Bonding Curve Reaches Target| D1
-    D1 -->|🔄 Auto-Create Pool| D2
-    D1 -->|🏁 If Meme Launch| E1
-    D1 -->|🏁 If DAO Launch| E2
-    F -->|🔒 Locked SPIKE = Voting Power| F1
+    %% Flujo
+    UI --> TL
+    UI --> VOTE
+    TL --> VP
+    VP --> MEME
+    VP --> DAO
+    TL --> AMM
+    FEES --> AMM
+    AMM --> DVRF
+    AI --> UI
+    VOTE --> TL
 
 ```
 
