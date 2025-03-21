@@ -1,111 +1,138 @@
-# Supra Spike: The Ultimate Launchpad on Supra Oracles
+# 🚀 Supra Spike: The Ultimate Launchpad on Supra Oracles
 
-Welcome to Supra Spike, the first meme on Supra Oracles and a token and project launch platform built on the Supra Oracles blockchain. Our narrative is simple yet powerful: **Spike creates things**. We started as a space for memes, but now we're evolving into a launchpad that combines fun with serious innovation, bringing to life both speculative projects and real utility initiatives (DAOs).
+Bienvenido a **Supra Spike**, el primer meme en Supra Oracles y una plataforma de lanzamiento para tokens y proyectos, construida sobre la blockchain de Supra Oracles. Nuestra idea es simple pero poderosa: **¡Spike crea cosas!** Lo que comenzó como un espacio para memes, ahora evoluciona hacia un launchpad que fusiona la diversión con la innovación real, dando vida tanto a proyectos especulativos como a iniciativas de utilidad (DAOs).
 
-## What is Supra Spike?
+---
 
-Supra Spike is an ecosystem composed of three key platforms:
+## 🌟 ¿Qué es Supra Spike?
 
-- **Chat**: A community hub powered by real-time crypto data from external APIs, designed to help new users understand the crypto world easily.
-- **AMM (SupraSwap)**: Our decentralized exchange for launched tokens, utilizing fungible assets for seamless trading.
-- **Token Launcher**: Inspired by Pump.fun, it allows users to launch memes and serious projects (DAOs) with ease.
+Supra Spike es un ecosistema que integra **tres plataformas clave**:
 
-Our mission is to democratize token launching on Supra Oracles, providing a space where anyone can create, launch, and grow—whether it’s a fun meme or a project with real impact. We are especially focused on attracting new users and people with no prior crypto experience, making the crypto world accessible and easy to understand.
+- **💬 Chat:** Un centro comunitario impulsado por datos cripto en tiempo real provenientes de APIs externas, diseñado para que los nuevos usuarios comprendan el mundo cripto de forma sencilla.
+- **🔄 AMM (SupraSwap):** Nuestro exchange descentralizado para tokens lanzados, que utiliza activos fungibles para facilitar el trading sin complicaciones.
+- **🚀 Token Launcher:** Inspirado en Pump.fun, permite a los usuarios lanzar tanto memes como proyectos serios (DAOs) de manera ágil.
 
-## How Does Supra Spike Work?
+> **Misión:** Democratizar el lanzamiento de tokens en Supra Oracles, ofreciendo un espacio donde cualquiera pueda crear, lanzar y crecer—ya sea un divertido meme o un proyecto con impacto real. Nos enfocamos en atraer a nuevos usuarios y personas sin experiencia previa en cripto, haciendo el mundo cripto accesible y fácil de entender.
 
-### 1. The Token Launcher
+---
 
-The heart of Supra Spike is its **Token Launcher**, where users can bring their ideas to life:
+## 🔍 ¿Cómo Funciona Supra Spike?
 
-#### Meme Launches:
-- A user creates a meme token on the launcher.
-- This token starts with a virtual pool and follows a bounding curve.
-- If the token "breaks" the bounding curve (reaches a threshold of volume or interest), it is officially launched on **SupraSwap**.
+### 1. **El Token Launcher**
 
-#### DAO Launches:
-- Similar to memes, but with a focus on utility and larger pools.
-- DAOs are real projects designed to generate long-term value.
-- They follow the same process: if they break the bounding curve, they move to **SupraSwap**.
+El corazón de Supra Spike es su **Token Launcher**, donde las ideas se convierten en realidad.
 
-### 2. The Bounding Curve
+#### 🎉 Meme Launches:
+- **Creación:** El usuario crea un token meme en el launcher.
+- **Inicio Virtual:** El token inicia con una piscina virtual y sigue una *bounding curve*.
+- **Lanzamiento:** Si el token "rompe" la curva (alcanzando un umbral de volumen o interés), se lanza oficialmente en **SupraSwap**.
 
-The bounding curve is the mechanism that determines if a token is ready to make the leap:
-- It represents a limit based on trading volume, liquidity, or engagement.
-- When a meme or DAO "breaks" it, a real pool is created on **SupraSwap**.
+#### 💡 DAO Launches:
+- **Enfoque:** Similar a los memes, pero centrado en la utilidad y en piscinas de mayor tamaño.
+- **Valor a Largo Plazo:** Los DAOs son proyectos reales diseñados para generar valor sostenido.
+- **Proceso:** Siguen el mismo proceso: si rompen la curva, pasan a **SupraSwap**.
 
-### 3. SupraSwap and Fees
+---
 
-Once on SupraSwap, these fungible tokens generate fees through trading.
-- These fees are distributed randomly among users using **Supra Oracles’ dVRF (Verifiable Random Function)**, ensuring transparency and fairness.
+### 2. **La Bounding Curve**
 
-### 4. Project Filtering
+La *bounding curve* es el mecanismo que determina si un token está listo para el salto:
+- **Función:** Representa un límite basado en el volumen de trading, liquidez o engagement.
+- **Acción:** Al romperla, se crea una piscina real en **SupraSwap**.
 
-We prioritize quality over quantity with a double-filter system:
-- **AI Filtering**: An artificial intelligence analyzes proposals, classifying them based on potential and originality, then displays them on a public dashboard.
-- **DAO (Community) Voting**: Users vote for their favorite projects on the dashboard, deciding which ones have the most potential.
+---
 
-This ensures only the best memes and DAOs advance.
+### 3. **SupraSwap y la Distribución de Tarifas**
 
-### 5. The Chat: Real-Time Crypto Data for Everyone
+Una vez en **SupraSwap**, los tokens fungibles generan tarifas a través del trading.
+- **Distribución de Tarifas:** Las tarifas se distribuyen aleatoriamente entre los usuarios utilizando el **dVRF (Verifiable Random Function)** de Supra Oracles, garantizando transparencia y equidad.
 
-Our **Chat** platform is designed to help new users and those unfamiliar with crypto by providing real-time crypto data in a simple, digestible way:
-- **APIs Integration**: Connects to external APIs from various platforms to fetch live crypto data.
-- **User-Friendly Interface**: Simplifies complex crypto information, helping newcomers navigate the crypto world with confidence.
-- **Community Hub**: A space for users to ask questions, share insights, and learn from each other.
+---
 
-## Differences Between Memes and DAOs
+### 4. **Filtrado de Proyectos**
 
-| Aspect   | Memes               | DAOs                        |
-|----------|---------------------|-----------------------------|
-| Purpose  | Fun and speculation | Real utility and innovation |
-| Pool Size| Small (virtual)     | Large (virtual)             |
-| Focus    | Quick and light     | Serious and sustainable     |
-| Path     | Launcher → SupraSwap| Launcher → SupraSwap        |
+Priorizamos la calidad sobre la cantidad con un sistema de doble filtro:
 
-## Key Features
+- **🤖 Filtrado por IA:** Una inteligencia artificial analiza las propuestas, clasificándolas por potencial y originalidad, y las muestra en un tablero público.
+- **👥 Votación Comunitaria:** Los usuarios votan por sus proyectos favoritos en el tablero, eligiendo cuáles tienen mayor potencial.
 
-- **Token Launcher**: Launch memes or DAOs in minutes using Move contracts.
-- **AI Filtering**: Automatic project classification to highlight the best.
-- **DAO Governance**: The community decides which projects deserve to shine.
-- **Fee Distribution**: Fees generated on SupraSwap are distributed via dVRF.
-- **AMM with Fungible Assets**: Facilitates trading of fungible tokens launched through the platform.
-- **Real-Time Chat**: Powered by external APIs for live crypto data, making it easy for newcomers to understand the crypto world.
-- **Complete Ecosystem**: Chat, AMM, and Launcher work together for a stronger Supra.
+> **Resultado:** Solo avanzan los mejores memes y DAOs.
 
-## Development Status
+---
 
-- **Token Launcher**: On testnet, allowing launches and tests of memes and DAOs. We will move to mainnet when SupraSwap is ready.
-- **SupraSwap**: In development; it will be the home for tokens that break the bounding curve.
-- **AI and DAO Filtering**: System in progress, with AI classification and a voting dashboard on the way.
-- **Chat**: Already active, connecting the community at [chat.supraspike.fun](https://chat.supraspike.fun).
+### 5. **El Chat: Datos Cripto en Tiempo Real para Todos**
 
-## Our Vision
+Nuestro **Chat** está diseñado para simplificar el mundo cripto, especialmente para nuevos usuarios:
+- **🔌 Integración de APIs:** Conecta con APIs externas para obtener datos cripto en vivo.
+- **👀 Interfaz Amigable:** Facilita la comprensión de información compleja.
+- **🤝 Comunidad:** Un espacio para preguntar, compartir y aprender en conjunto.
 
-At Supra Spike, the first meme on Supra, we believe that Spike creates things—from hilarious memes to game-changing DAOs. We aim to:
-- Be the leading launchpad on Supra Oracles.
-- Foster an ecosystem where fun and innovation coexist.
-- Empower the community to decide which projects deserve to grow.
-- Turn Supra into a hub for real value creation, beyond speculation.
-- Make crypto accessible to everyone, especially those new to the space.
+---
 
-## Join Supra Spike
+## 📊 Comparativa: Memes vs. DAOs
 
-Be part of this revolution! Help us build the future of launches on Supra Oracles.
-- **Launcher Website**: [supraspike.fun](https://supraspike.fun)
-- **AMM Website**: [supraswap.lol](https://supraswap.lol)
-- **Community Chat**: [chat.supraspike.fun](https://chat.supraspike.fun)
-- **Telegram**: [Join here](#)
-- **Twitter**: [Follow us](#)
-- **Medium**: [Read more](#)
+| **Aspecto** | **Memes**               | **DAOs**                        |
+|-------------|-------------------------|---------------------------------|
+| **Propósito**   | Diversión y especulación  | Utilidad real e innovación       |
+| **Tamaño de Piscina** | Pequeña (virtual)       | Grande (virtual)                |
+| **Enfoque**   | Rápido y ligero           | Serio y sostenible              |
+| **Ruta**      | Launcher → SupraSwap      | Launcher → SupraSwap            |
 
-## Meet the Team
+---
+
+## 🔑 Características Clave
+
+- **Token Launcher:** Lanza memes o DAOs en minutos utilizando contratos *Move*.
+- **Filtrado por IA:** Clasificación automática para destacar los mejores proyectos.
+- **Gobernanza DAO:** La comunidad decide qué proyectos merecen brillar.
+- **Distribución de Tarifas:** Las tarifas generadas en SupraSwap se reparten vía dVRF.
+- **AMM con Activos Fungibles:** Facilita el trading de tokens lanzados a través de la plataforma.
+- **Chat en Tiempo Real:** Datos cripto en vivo para que incluso los nuevos comprendan el mundo.
+- **Ecosistema Completo:** Chat, AMM y Launcher trabajan en conjunto para potenciar Supra Spike.
+
+---
+
+## 🚧 Estado de Desarrollo
+
+- **Token Launcher:** Actualmente en testnet, permitiendo el lanzamiento y prueba de memes y DAOs. Se migrará a mainnet cuando SupraSwap esté listo.
+- **SupraSwap:** En desarrollo; será el hogar para los tokens que rompan la bounding curve.
+- **Filtrado IA y DAO:** Sistema en progreso, con clasificación por IA y un tablero de votación en camino.
+- **Chat:** Ya activo, conectando a la comunidad en [chat.supraspike.fun](https://chat.supraspike.fun).
+
+---
+
+## 🌈 Nuestra Visión
+
+En Supra Spike, creemos que **¡Spike crea cosas!** Desde memes divertidísimos hasta DAOs revolucionarios, buscamos:
+- Convertirnos en el launchpad líder en Supra Oracles.
+- Fomentar un ecosistema donde la diversión y la innovación convivan.
+- Empoderar a la comunidad para decidir qué proyectos deben crecer.
+- Transformar Supra en un centro de creación de valor real, más allá de la especulación.
+- Hacer que el cripto sea accesible para todos, especialmente para los nuevos en el mundo.
+
+---
+
+## 🤝 Únete a Supra Spike
+
+¡Sé parte de esta revolución y ayudemos a construir el futuro de los lanzamientos en Supra Oracles!
+
+- **🌐 Launcher Website:** [supraspike.fun](https://supraspike.fun)
+- **🔄 AMM Website:** [supraswap.lol](https://supraswap.lol)
+- **💬 Community Chat:** [chat.supraspike.fun](https://chat.supraspike.fun)
+- **📲 Telegram:** [Únete aquí](#)
+- **🐦 Twitter:** [Síguenos](#)
+- **📝 Medium:** [Leer más](#)
+
+---
+
+## 👥 Conoce al Equipo
 
 - **Daniela DeFi** – [@chicablockchain](#)
 - **Snabur** – [@ZAMBURXD](#)
 - **Maira** – [@criptoMaira](#)
 - **Jaione** – [@jaionee](#)
 - **Mr Ga** – [@mpb_algos](#)
+
 
 
 ---
