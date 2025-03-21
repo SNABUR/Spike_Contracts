@@ -154,36 +154,36 @@ Currently, our platform is in testnet. The flow diagram below explains the futur
 
 ```mermaid
 graph TD;
-
     %% Interfaz de Usuario y Comunidad
-    UI[Frontend Dashboard]
-    VOTE[Comunidad vota con tokens SPIKE]
+    UI[Frontend Dashboard];
+    VOTE[Comunidad vota con tokens SPIKE];
 
     %% Token Launcher Supra Spike
-    TL[Token Launcher (Supra Spike)]
-    VP[Virtual Pools Personalizables]
-    MEME[Meme Launch (Pools estándar)]
-    DAO[DAO Launch (Pools ampliados)]
+    TL[Token Launcher (Supra Spike)];
+    VP[Virtual Pools Personalizables];
+    MEME[Meme Launch (Pools estándar)];
+    DAO[DAO Launch (Pools ampliados)];
 
     %% AMM SupraSwap
-    AMM[AMM - SupraSwap]
-    FEES[Fees de LP quemados]
-    DVRF[Selección de recompensas (Supra DVRF)]
+    AMM[AMM - SupraSwap];
+    FEES[Fees de LP quemados];
+    DVRF[Selección de recompensas (Supra DVRF)];
 
     %% Filtrado de ideas por IA
-    AI[IA - Filtrado y Curaduría de Ideas]
+    AI[IA - Filtrado y Curaduría de Ideas];
 
     %% Flujo
-    UI --> TL
-    UI --> VOTE
-    TL --> VP
-    VP --> MEME
-    VP --> DAO
-    TL --> AMM
-    FEES --> AMM
-    AMM --> DVRF
-    AI --> UI
-    VOTE --> TL
+    UI --> TL;
+    UI --> VOTE;
+    TL --> VP;
+    VP --> MEME;
+    VP --> DAO;
+    TL --> AMM;
+    FEES --> AMM;
+    AMM --> DVRF;
+    AI --> UI;
+    VOTE --> TL;
+
 
 ```
 
