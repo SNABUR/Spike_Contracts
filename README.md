@@ -154,35 +154,40 @@ Currently, our platform is in testnet. The flow diagram below explains the futur
 
 ```mermaid
 graph TD;
-    %% Interfaz de Usuario y Comunidad
-    UI["Frontend Dashboard"];
-    VOTE["Comunidad vota con tokens SPIKE"];
+    %% User and Dashboard
+    USER["User"];
+    DASH["Dashboard (with AI classification)"];
+    VOTE["Voting for favorite project (using SPIKE tokens)"];
 
-    %% Token Launcher Supra Spike
-    TL["Token Launcher (Supra Spike)"];
-    VP["Virtual Pools Personalizables"];
-    MEME["Meme Launch (Pools estándar)"];
-    DAO["DAO Launch (Pools ampliados)"];
+    %% Spike Launcher (Supra Spike)
+    LAUNCHER["Spike Launcher (Supra Spike)"];
+    MEME["Meme Launch (Standard Pool)"];
+    DAO["DAO Launch (Virtual Pool, Bigger)"];
 
-    %% AMM SupraSwap
-    AMM["AMM - SupraSwap"];
-    FEES["Fees de LP quemados"];
-    DVRF["Selección de recompensas (Supra DVRF)"];
+    %% Bonding Curve & Supraswap (AMM)
+    BONDING["Bonding Curve Break"];
+    SWAP["Supraswap (AMM)"];
+    FEES["Generated Fees"];
+    DVRF["dVRF Rewards Distribution"];
 
-    %% Filtrado de ideas por IA
-    AI["IA - Filtrado y Curaduría de Ideas"];
+    %% Flow for Meme Launch
+    USER -->|Launches Meme| LAUNCHER;
+    LAUNCHER --> MEME;
+    MEME --> BONDING;
+    BONDING --> SWAP;
+    SWAP --> FEES;
+    FEES --> DVRF;
 
-    %% Flujo
-    UI --> TL;
-    UI --> VOTE;
-    TL --> VP;
-    VP --> MEME;
-    VP --> DAO;
-    TL --> AMM;
-    FEES --> AMM;
-    AMM --> DVRF;
-    AI --> UI;
-    VOTE --> TL;
+    %% Flow for DAO Launch
+    USER -->|Launches DAO Project| LAUNCHER;
+    LAUNCHER --> DAO;
+    DAO --> BONDING;
+
+    %% AI and Dashboard Integration
+    LAUNCHER --> DASH;
+    DASH --> VOTE;
+    VOTE --> LAUNCHER;
+
 
 
 ```
