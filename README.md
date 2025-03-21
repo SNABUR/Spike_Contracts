@@ -1,118 +1,112 @@
-# 🚀 Supra Spike: The Next-Gen Token & Project Launcher on Supra Oracles  
+# Supra Spike: The Ultimate Launchpad on Supra Oracles
 
-Welcome to **Supra Spike**, the ultimate **meme and project launcher** built on the **Supra Oracles** blockchain. While we started as a **meme-focused platform**, we aim to **expand beyond memes**, creating a space where both fun and **serious, utility-driven projects** can thrive.  
+Welcome to Supra Spike, the first meme on Supra Oracles and a token and project launch platform built on the Supra Oracles blockchain. Our narrative is simple yet powerful: **Spike creates things**. We started as a space for memes, but now we're evolving into a launchpad that combines fun with serious innovation, bringing to life both speculative projects and real utility initiatives (DAOs).
 
----
+## What is Supra Spike?
 
-## 🔥 What is Supra Spike?  
+Supra Spike is an ecosystem composed of three key platforms:
 
-Supra Spike is a **token and project launchpad** that empowers creators to bring their ideas to life using **Move smart contracts**. Our goal is to **grow the Supra ecosystem**, not just as a place for speculation but as a **hub for real innovation**.  
+- **Chat**: A community hub powered by real-time crypto data from external APIs, designed to help new users understand the crypto world easily.
+- **AMM (SupraSwap)**: Our decentralized exchange for launched tokens, utilizing fungible assets for seamless trading.
+- **Token Launcher**: Inspired by Pump.fun, it allows users to launch memes and serious projects (DAOs) with ease.
 
-With **Supra Spike**, we aim to:  
-✅ **Launch tokens easily** – Whether it's a meme or a serious utility token, our platform simplifies the process.  
-✅ **Support real innovation** – We provide tools to **crowdfund ideas**, making it easier for projects with real potential to get funded.  
-✅ **Grow the ecosystem** – By enabling both fun and meaningful projects, we help expand Supra beyond just speculation.  
+Our mission is to democratize token launching on Supra Oracles, providing a space where anyone can create, launch, and grow—whether it’s a fun meme or a project with real impact. We are especially focused on attracting new users and people with no prior crypto experience, making the crypto world accessible and easy to understand.
 
----
+## How Does Supra Spike Work?
 
-## 🌟 Key Features  
+### 1. The Token Launcher
 
-- **🛠 Token Factory** – Launch tokens seamlessly with Move-based smart contracts.  
-- **🎭 Meme & Utility Project Launches** – A diverse space for both memes and serious blockchain projects.  
-- **📊 AI-Powered Leaderboard** – Highlighting the best ideas based on quality and innovation.  
-- **🎨 First-Ever Supra NFT Collection** – Combining creativity with blockchain utility.  
+The heart of Supra Spike is its **Token Launcher**, where users can bring their ideas to life:
 
----
+#### Meme Launches:
+- A user creates a meme token on the launcher.
+- This token starts with a virtual pool and follows a bounding curve.
+- If the token "breaks" the bounding curve (reaches a threshold of volume or interest), it is officially launched on **SupraSwap**.
 
-## 📌 Development Status  
+#### DAO Launches:
+- Similar to memes, but with a focus on utility and larger pools.
+- DAOs are real projects designed to generate long-term value.
+- They follow the same process: if they break the bounding curve, they move to **SupraSwap**.
 
-🔹 **Token Launcher**: Currently in **testnet**, allowing users to create, deploy, and trade tokens easily. We plan to launch on **mainnet** once Automated Market Makers (AMMs) are live.  
+### 2. The Bounding Curve
 
-🔹 **AI-Powered Project Filtering & Governance**: We are developing an **AI-driven filtering system** that will analyze project proposals and highlight **truly innovative ideas**. This AI will act as a **first filter**, identifying promising projects while reducing the chances of scams or low-quality initiatives.  
+The bounding curve is the mechanism that determines if a token is ready to make the leap:
+- It represents a limit based on trading volume, liquidity, or engagement.
+- When a meme or DAO "breaks" it, a real pool is created on **SupraSwap**.
 
-🔹 **Community Governance Voting**: After passing the **AI filter**, projects will go through a **community voting process** via **Spike governance mechanisms**. This ensures a **double-layered filtering system** where only the most **valuable and high-potential** projects get community support and visibility.  
+### 3. SupraSwap and Fees
 
-This **dual validation system (AI + Governance)** will help maintain a **high standard for projects launched on Supra**, ensuring real innovation while **empowering the Spike community** to shape the ecosystem.  
+Once on SupraSwap, these fungible tokens generate fees through trading.
+- These fees are distributed randomly among users using **Supra Oracles’ dVRF (Verifiable Random Function)**, ensuring transparency and fairness.
 
+### 4. Project Filtering
 
-## 🛠 Smart Contracts  
+We prioritize quality over quantity with a double-filter system:
+- **AI Filtering**: An artificial intelligence analyzes proposals, classifying them based on potential and originality, then displays them on a public dashboard.
+- **DAO (Community) Voting**: Users vote for their favorite projects on the dashboard, deciding which ones have the most potential.
 
-Supra Spike leverages **Move contracts** to provide seamless functionality for **token launches, NFTs, and IDOs**. Below are the key contracts:  
+This ensures only the best memes and DAOs advance.
 
-### 🔹 Pump FA Contract  
+### 5. The Chat: Real-Time Crypto Data for Everyone
 
-- **Address**: `0x6e3e09ab7fd0145d7befc0c68d6944ddc1a90fd45b8a6d28c76d8c48bed676b0::pump_sup`  
-- **Functions**:  
-  - `deploy` – Used for creating tokens.  
-  - `buy` & `sell` – Enables users to trade tokens.  
-- **Features**: Implements **virtual pools** similar to **Pump.fun** for efficient token distribution.  
-- **Status**: Currently in **testnet**, with ongoing improvements.  
+Our **Chat** platform is designed to help new users and those unfamiliar with crypto by providing real-time crypto data in a simple, digestible way:
+- **APIs Integration**: Connects to external APIs from various platforms to fetch live crypto data.
+- **User-Friendly Interface**: Simplifies complex crypto information, helping newcomers navigate the crypto world with confidence.
+- **Community Hub**: A space for users to ask questions, share insights, and learn from each other.
 
-### 🔹 NFT Contract  
+## Differences Between Memes and DAOs
 
-- **Address**: `0x6e3e09ab7fd0145d7befc0c68d6944ddc1a90fd45b8a6d28c76d8c48bed676b0::nft`  
-- **Description**: Manages the **first-ever NFT collection** on Supra, showcasing creative potential.  
+| Aspect   | Memes               | DAOs                        |
+|----------|---------------------|-----------------------------|
+| Purpose  | Fun and speculation | Real utility and innovation |
+| Pool Size| Small (virtual)     | Large (virtual)             |
+| Focus    | Quick and light     | Serious and sustainable     |
+| Path     | Launcher → SupraSwap| Launcher → SupraSwap        |
 
-### 🔹 IDO Contract  
+## Key Features
 
-- **Address**: `0x6e3e09ab7fd0145d7befc0c68d6944ddc1a90fd45b8a6d28c76d8c48bed676b0::ido`  
-- **Description**: Handles **token distributions** during the IDO phase to ensure **fair and transparent launches**.  
+- **Token Launcher**: Launch memes or DAOs in minutes using Move contracts.
+- **AI Filtering**: Automatic project classification to highlight the best.
+- **DAO Governance**: The community decides which projects deserve to shine.
+- **Fee Distribution**: Fees generated on SupraSwap are distributed via dVRF.
+- **AMM with Fungible Assets**: Facilitates trading of fungible tokens launched through the platform.
+- **Real-Time Chat**: Powered by external APIs for live crypto data, making it easy for newcomers to understand the crypto world.
+- **Complete Ecosystem**: Chat, AMM, and Launcher work together for a stronger Supra.
 
-🚀 **This IDO is exclusively for our token, Spike**. We are committed to ensuring a **secure, community-driven launch**, with fair distribution and strong ecosystem integration.  
+## Development Status
 
-For more details about **tokenomics and contract functionality**, check out our **[Medium page](https://medium.com/@supraspike.fun/spike-tokenomics-and-contracts-bb7b8f15527e)**.  
+- **Token Launcher**: On testnet, allowing launches and tests of memes and DAOs. We will move to mainnet when SupraSwap is ready.
+- **SupraSwap**: In development; it will be the home for tokens that break the bounding curve.
+- **AI and DAO Filtering**: System in progress, with AI classification and a voting dashboard on the way.
+- **Chat**: Already active, connecting the community at [chat.supraspike.fun](https://chat.supraspike.fun).
 
+## Our Vision
 
-## 🔹 Tokenomics & Distribution  
+At Supra Spike, the first meme on Supra, we believe that Spike creates things—from hilarious memes to game-changing DAOs. We aim to:
+- Be the leading launchpad on Supra Oracles.
+- Foster an ecosystem where fun and innovation coexist.
+- Empower the community to decide which projects deserve to grow.
+- Turn Supra into a hub for real value creation, beyond speculation.
+- Make crypto accessible to everyone, especially those new to the space.
 
-Our **tokenomics and distribution plan** can be found in detail on our **[Medium page](https://medium.com/@supraspike.fun/spike-tokenomics-and-contracts-bb7b8f15527e)**.  
-We are committed to **transparency and fairness** in all our launches.  
+## Join Supra Spike
 
----
+Be part of this revolution! Help us build the future of launches on Supra Oracles.
+- **Launcher Website**: [supraspike.fun](https://supraspike.fun)
+- **AMM Website**: [supraswap.lol](https://supraswap.lol)
+- **Community Chat**: [chat.supraspike.fun](https://chat.supraspike.fun)
+- **Telegram**: [Join here](#)
+- **Twitter**: [Follow us](#)
+- **Medium**: [Read more](#)
 
-## 💼 Team Roles
+## Meet the Team
 
-- **👨‍💻 Development & Strategy** – Led by a dedicated builder focused on **smart contracts** and **platform UI/UX**.
-- **📢 Community & Engagement** – Managed by a passionate team ensuring **strong community support on Telegram and Twitter**.
+- **Daniela DeFi** – [@chicablockchain](#)
+- **Snabur** – [@ZAMBURXD](#)
+- **Maira** – [@criptoMaira](#)
+- **Jaione** – [@jaionee](#)
+- **Mr Ga** – [@mpb_algos](#)
 
-## 🎬 Team Video Presentation
-
-Check out our team introduction and demo in the following video:
-[Video Presentation](https://youtu.be/Jw08FY1TR5k)
-
-## 🚀 Our Team: DeFi and Crypto Ecosystem
-
-We are constantly innovating and building since the **launch of Supra mainnet**.
-
-- 🛠 **Daniela DeFi** – [@chicablockchain](https://x.com/chicablockchain)
-- 🎭 **Snabur** – [@ZAMBURXD](https://x.com/ZAMBURXD)
-- 💡 **Maira** – [@criptoMaira](https://x.com/criptoMaira)
-- 🔥 **Jaione** – [@jaionee](https://x.com/jaionee)
-
-We have been actively building and contributing to the **DeFi** and **crypto ecosystem**.
-
----  
-
-
-## 🎯 Our Vision  
-
-We want **Supra Oracles** to be more than just a blockchain—it should be a **launchpad for groundbreaking ideas**. With Supra Spike, we’re building:  
-
-💡 **A trusted platform** for launching high-quality projects.  
-📈 **An ecosystem that grows organically**, fueled by real innovation and community-driven initiatives.  
-🤖 **AI-driven project evaluation**, ensuring that **serious projects get the attention they deserve**.  
-🌎 **A fair and open crowdfunding space**, making it easier for innovative ideas to become reality.  
-
-We are committed to making Supra **the go-to blockchain for token launches**—not just for speculation but for **real value creation**.  
-
-## Join the Movement  
-
-Be part of **Supra Spike** and help shape the **future of token launches**!  
-
-🌐 **Website**: [supraspike.fun](https://supraspike.fun)  
-💬 **Telegram**: [Join our community](https://t.me/supraspike)  
-🐦 **Twitter**: [Follow us](https://x.com/supra_spikes)  
-📝 **Medium**: [Read our insights](https://medium.com/@supraspike.fun/spike-tokenomics-and-contracts-bb7b8f15527e)  
 
 ---
 
