@@ -8,8 +8,8 @@ Welcome to **Supra Spike**, the very first meme on Supra Oracles and a cutting-e
 
 Supra Spike is a dynamic ecosystem built around **three core platforms**:
 
-- **💬 Chat:** A community hub offering real-time crypto data from external APIs, designed to help newcomers easily navigate the crypto world.
-- **🔄 AMM (SupraSwap):** Our decentralized exchange for launched tokens, utilizing fungible assets for smooth trading experiences.
+- **💬 Chat:** A chat offering real-time crypto data from external APIs, designed to help newcomers easily navigate the crypto world.
+- **🔄 AMM (SupraSwap):** Our decentralized exchange for launched tokens in supra spike, utilizing fungible assets for smooth trading experiences.
 - **🚀 Token Launcher:** Inspired by Pump.fun, this tool allows users to effortlessly launch both memes and serious projects (DAOs).
 
 > **Our Mission:** To democratize token launching on Supra Oracles, creating a space where anyone can create, launch, and grow—whether it's a playful meme or a project with lasting impact. We focus on making crypto accessible to all, especially those new to the space.
@@ -37,7 +37,7 @@ At the heart of Supra Spike is the **Token Launcher**, where innovative ideas co
 ### 2. **The Bounding Curve**
 
 The *bounding curve* is the mechanism that determines when a token is ready to take the leap:
-- **Purpose:** It sets a limit based on trading volume, liquidity, or user engagement.
+- **Purpose:** It sets a limit based on liquidity.
 - **Outcome:** When a meme or DAO "breaks" this curve, a real pool is created on **SupraSwap**.
 
 ---
@@ -65,7 +65,7 @@ We prioritize quality over quantity using a robust dual-filter system:
 Our **Chat** platform demystifies the crypto world, especially for newcomers:
 - **🔌 API Integration:** Seamlessly connects to external APIs for live crypto data.
 - **👀 User-Friendly:** Simplifies complex information into digestible insights.
-- **🤝 Community Hub:** A vibrant space for asking questions, sharing knowledge, and learning together.
+- **🤝 Community Hub:** A vibrant space for asking questions to AI and learning.
 
 ---
 
