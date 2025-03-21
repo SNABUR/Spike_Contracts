@@ -1,6 +1,6 @@
 # 🚀 Supra Spike: The Ultimate Launchpad on Supra Oracles
 
-Welcome to **Supra Spike**, the very first meme on Supra Oracles and a cutting-edge platform for launching tokens and projects on the Supra Oracles blockchain. Our motto is simple yet powerful: **Spike creates things!** What started as a hub for memes has evolved into a launchpad that blends fun with serious innovation, powering both speculative projects and genuine utility initiatives (DAOs).
+Welcome to **Supra Spike**, the very first meme on Supra Oracles and a cutting-edge platform for launching tokens and projects on the Supra Oracles blockchain. Our motto is simple yet powerful: **Spike creates things!** A launchpad that blends fun with serious innovation, powering both speculative projects and genuine utility initiatives (DAOs).
 
 ---
 
