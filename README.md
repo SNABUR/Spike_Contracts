@@ -103,8 +103,8 @@ Our **Chat** platform demystifies the crypto world, especially for newcomers:
 
 ## 🌈 Our Vision
 
-At Supra Spike, we believe **Spike creates things!** From hilarious memes to revolutionary DAOs, our goals are to:
-- Establish the premier launchpad on Supra Oracles.
+At Supra Spike, all our platforms are interconnected through SPIKE, we believe **Spike creates things!** From hilarious memes to revolutionary DAOs, our goals are to:
+- Establish the premier launchpad on Supra.
 - Foster an ecosystem where fun meets innovation.
 - Empower our community to decide which projects deserve to grow.
 - Transform Supra into a hub of real value creation, moving beyond mere speculation.
