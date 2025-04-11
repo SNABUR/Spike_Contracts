@@ -10,7 +10,7 @@ Supra Spike is a dynamic ecosystem built around **three core platforms**:
 
 - **💬 Chat:** A chat offering real-time crypto data from external APIs, designed to help newcomers easily navigate the crypto world.
 - **🔄 AMM (SupraSwap):** Our decentralized exchange for launched tokens in supra spike, utilizing fungible assets for smooth trading experiences.
-- **🚀 Token Launcher:** Inspired by Pump.fun, this tool allows users to effortlessly launch both memes and serious projects (DAOs).
+- **🚀 Token Launcher:** IInspired by Pump.fun, this platform allows users to effortlessly launch both memes and serious projects (DAOs), with customizable virtual pools that can be large or small depending on the project's needs.
 
 > **Our Mission:** To democratize token launching on Supra Oracles, creating a space where anyone can create, launch, and grow—whether it's a playful meme or a project with lasting impact. We focus on making crypto accessible to all, especially those new to the space.
 
@@ -28,7 +28,7 @@ At the heart of Supra Spike is the **Token Launcher**, where innovative ideas co
 - **Launch:** If the token "breaks" the curve (reaches a threshold of volume or interest), it officially launches on **SupraSwap**.
 
 #### 💡 DAO Launches:
-- **Focus:** Similar process to memes, but with emphasis on utility and larger pools.
+- **Focus:** Similar process to memes, but with emphasis on utility and larger virtual pools.
 - **Long-Term Value:** DAOs are real projects designed to generate lasting value.
 - **Process:** They too follow the same trajectory: if they break the curve, they move to **SupraSwap**.
 
@@ -49,7 +49,7 @@ Once on **SupraSwap**, the launched tokens generate trading fees.
 
 ---
 
-### 4. **Project Filtering**
+### 4. **Project Filtering (in development)**
 
 We prioritize quality over quantity using a robust dual-filter system:
 
