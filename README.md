@@ -9,7 +9,7 @@ Welcome to **Supra Spike**, the very first meme on Supra Oracles and a cutting-e
 Supra Spike is a dynamic ecosystem built around **three core platforms**:
 
 - **💬 Chat:** A chat offering real-time crypto data from external APIs, designed to help newcomers easily navigate the crypto world.
-- **🔄 AMM (SupraSwap):** Our decentralized exchange for launched tokens in supra spike, utilizing fungible assets for smooth trading experiences.
+- **🔄 AMM (SupraSwap):**  Our decentralized exchange for tokens launched on Supra Spike, utilizing fungible assets and community-distributed rewards.
 - **🚀 Token Launcher:** IInspired by Pump.fun, this platform allows users to effortlessly launch both memes and serious projects (DAOs), with customizable virtual pools that can be large or small depending on the project's needs.
 
 > **Our Mission:** To democratize token launching on Supra Oracles, creating a space where anyone can create, launch, and grow—whether it's a playful meme or a project with lasting impact. We focus on making crypto accessible to all, especially those new to the space.
